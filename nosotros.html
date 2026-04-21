@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Nosotros — Shift · AI, Data & Software Studio</title>
+<meta name="description" content="Somos el equipo de tecnología que tu empresa necesitaba. IA, datos y software a medida desde CDMX para toda LATAM."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+/* ── Story section ── */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.story-visual{position:relative}
+.story-card-main{background:var(--slate);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden}
+.story-card-main::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 80%,rgba(224,107,48,.25) 0%,transparent 55%);pointer-events:none}
+.story-quote{font-size:1.25rem;font-weight:700;color:#fff;line-height:1.5;position:relative;z-index:1;margin-bottom:1.5rem}
+.story-quote::before{content:'"';font-size:3rem;color:var(--orange);font-weight:900;line-height:.5;display:block;margin-bottom:.5rem}
+.story-author{display:flex;align-items:center;gap:.875rem;position:relative;z-index:1}
+.story-avatar{width:44px;height:44px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;font-size:.875rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.story-author-name{font-size:.875rem;font-weight:700;color:#fff}
+.story-author-role{font-size:.78rem;color:rgba(255,255,255,.5)}
+.story-stat{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;position:absolute;box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.story-stat-n{font-size:1.75rem;font-weight:900;letter-spacing:-.04em;color:var(--orange);line-height:1}
+.story-stat-l{font-size:.78rem;color:var(--slate3);font-weight:500;margin-top:.2rem}
+
+/* ── Team ── */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.team-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .3s,box-shadow .3s}
+.team-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(0,0,0,.09)}
+.team-avatar-wrap{height:200px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;font-weight:900;letter-spacing:-.04em;position:relative;overflow:hidden}
+.team-card-body{padding:1.5rem}
+.team-card-body h3{font-size:1.0625rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.2rem}
+.team-card-body .role{font-size:.8125rem;font-weight:600;color:var(--orange);margin-bottom:.625rem}
+.team-card-body p{font-size:.8125rem;color:var(--slate2);line-height:1.65}
+
+/* ── Values ── */
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.val-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;transition:transform .3s,box-shadow .3s}
+.val-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.07)}
+.val-icon{font-size:2rem;margin-bottom:1rem}
+.val-card h3{font-size:1rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem}
+.val-card p{font-size:.875rem;color:var(--slate2);line-height:1.65}
+
+/* ── Timeline ── */
+.timeline{max-width:700px;margin:0 auto}
+.tl-item{display:flex;gap:2rem;padding-bottom:2.5rem;position:relative}
+.tl-item::before{content:'';position:absolute;left:19px;top:40px;bottom:0;width:2px;background:var(--border)}
+.tl-item:last-child::before{display:none}
+.tl-dot{width:40px;height:40px;border-radius:50%;background:var(--orange-l);border:2px solid var(--orange-m);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;font-weight:800;color:var(--orange)}
+.tl-body{padding-top:.5rem}
+.tl-year{font-size:.78rem;font-weight:700;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.3rem}
+.tl-body h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.tl-body p{font-size:.875rem;color:var(--slate2);line-height:1.65}
+
+@media(max-width:1024px){
+  .story-grid{grid-template-columns:1fr;gap:3rem}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .values-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .team-grid{grid-template-columns:1fr 1fr}
+  .values-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:500px){
+  .team-grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="glow"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="logo">Shift<span>.</span></a>
+  <div class="nav-links">
+    <a href="nosotros.html">Nosotros</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="casos.html">Casos</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="contacto.html" class="btn btn-o btn-nav">Consulta gratis →</a>
+  </div>
+  <button class="hbg" id="hbg" aria-label="Menú">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+  </button>
+</nav>
+<div class="mm" id="mm">
+  <a href="nosotros.html">Nosotros</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="casos.html">Casos de uso</a>
+  <a href="contacto.html">Contacto</a>
+  <a href="contacto.html" class="btn btn-o" style="margin-top:1rem;justify-content:center">Consulta gratis →</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-i">
+    <span class="tag to fu d1">Nuestro equipo</span>
+    <h1 class="fu d2">Somos el equipo de<br>tecnología que tu<br>empresa <em>necesitaba.</em></h1>
+    <p class="fu d3">Un equipo pequeño, senior y enfocado en resultados reales. Sin capas de burocracia, sin juniors haciendo tu proyecto, sin presentaciones que no llevan a nada.</p>
+    <div class="page-hero-ctas fu d4">
+      <a href="contacto.html" class="btn btn-o">Hablar con nosotros →</a>
+      <a href="casos.html" class="btn btn-g">Ver nuestro trabajo</a>
+    </div>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<div class="nstrip reveal">
+  <div class="nstrip-i">
+    <div><div class="nv">2022</div><div class="nl2">Fundados en CDMX</div></div>
+    <div><div class="nv">30+</div><div class="nl2">Proyectos entregados</div></div>
+    <div><div class="nv">8</div><div class="nl2">Industrias atendidas</div></div>
+    <div><div class="nv">100%</div><div class="nl2">En tiempo y presupuesto</div></div>
+  </div>
+</div>
+
+<!-- STORY -->
+<div class="section" style="background:#fff">
+  <div class="section-i">
+    <div class="story-grid">
+      <div class="reveal">
+        <span class="tag to" style="margin-bottom:1.25rem;display:inline-flex">Nuestra historia</span>
+        <h2 class="section-h2" style="margin-bottom:1.5rem">Nacimos de la frustración con la tecnología que no funciona.</h2>
+        <p style="font-size:1rem;color:var(--slate2);line-height:1.8;margin-bottom:1.25rem">En 2022, después de años trabajando en grandes consultoras y empresas de tecnología en CDMX, Diego y Alejandro se dieron cuenta de algo: la mayoría de los proyectos de tecnología fracasan no por falta de talento, sino por exceso de proceso, capas de intermediarios y falta de enfoque en resultados reales.</p>
+        <p style="font-size:1rem;color:var(--slate2);line-height:1.8;margin-bottom:2rem">Fundaron Shift con una premisa simple: equipos pequeños, senior y completamente dedicados entregan mejor tecnología, más rápido y con mayor impacto que los grandes despachos. Cuatro años después, 30+ proyectos lo confirman.</p>
+        <div style="display:flex;gap:2rem">
+          <div>
+            <div style="font-size:1.75rem;font-weight:900;letter-spacing:-.04em;color:var(--orange)">87%</div>
+            <div style="font-size:.8125rem;color:var(--slate3)">eficiencia promedio</div>
+          </div>
+          <div>
+            <div style="font-size:1.75rem;font-weight:900;letter-spacing:-.04em;color:var(--blue)">3.2x</div>
+            <div style="font-size:.8125rem;color:var(--slate3)">productividad</div>
+          </div>
+          <div>
+            <div style="font-size:1.75rem;font-weight:900;letter-spacing:-.04em;color:var(--slate)">48h</div>
+            <div style="font-size:.8125rem;color:var(--slate3)">propuesta técnica</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-visual reveal">
+        <div class="story-card-main">
+          <div class="story-quote">La tecnología debería resolver problemas reales de negocio, no crear nuevos problemas técnicos.</div>
+          <div class="story-author">
+            <div class="story-avatar">DR</div>
+            <div>
+              <div class="story-author-name">Diego Ramírez</div>
+              <div class="story-author-role">CEO & Co-fundador, Shift</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-stat" style="top:-20px;right:-15px">
+          <div class="story-stat-n">30+</div>
+          <div class="story-stat-l">Proyectos entregados</div>
+        </div>
+        <div class="story-stat" style="bottom:30px;left:-15px">
+          <div class="story-stat-n">CDMX</div>
+          <div class="story-stat-l">Base · toda LATAM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div class="section" style="background:var(--bg);border-top:1px solid var(--border)">
+  <div class="section-i">
+    <div class="section-hd reveal">
+      <div>
+        <span class="tag to" style="margin-bottom:1rem;display:inline-flex">El equipo</span>
+        <h2 class="section-h2">Las personas detrás<br>de los resultados.</h2>
+      </div>
+      <p class="section-sub">Cada miembro del equipo tiene +8 años de experiencia en su especialidad. No hay intermediarios entre tú y el talento.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar-wrap" style="background:linear-gradient(135deg,#fdf0e8,#f5c9a8)">
+          <span style="color:var(--orange)">DR</span>
+        </div>
+        <div class="team-card-body">
+          <h3>Diego Ramírez</h3>
+          <div class="role">CEO & Strategy</div>
+          <p>10 años en tecnología y negocios. Ex-McKinsey Digital. Especialista en transformación digital para empresas medianas y grandes.</p>
+          <div class="pills" style="margin-top:.75rem">
+            <span class="pill">Strategy</span><span class="pill">Product</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar-wrap" style="background:linear-gradient(135deg,#eef1fc,#b8c3f5)">
+          <span style="color:var(--blue)">AT</span>
+        </div>
+        <div class="team-card-body">
+          <h3>Alejandro Torres</h3>
+          <div class="role">CTO & Architecture</div>
+          <p>12 años construyendo sistemas distribuidos. Ex-Google y Rappi. Diseña la arquitectura técnica de cada proyecto en Shift.</p>
+          <div class="pills" style="margin-top:.75rem">
+            <span class="pill">Backend</span><span class="pill">Cloud</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar-wrap" style="background:linear-gradient(135deg,#f3eeff,#d4baf5)">
+          <span style="color:#9c5de0">SM</span>
+        </div>
+        <div class="team-card-body">
+          <h3>Sofía Méndez</h3>
+          <div class="role">Design & Product</div>
+          <p>8 años diseñando productos digitales que la gente realmente usa. Ex-Nubank. Combina diseño y visión de negocio en cada solución.</p>
+          <div class="pills" style="margin-top:.75rem">
+            <span class="pill">UX/UI</span><span class="pill">Product</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar-wrap" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">
+          <span style="color:#2e7d32">CV</span>
+        </div>
+        <div class="team-card-body">
+          <h3>Carlos Vega</h3>
+          <div class="role">Data & ML Lead</div>
+          <p>PhD en Ciencias de Datos. Ex-Meta. Diseña e implementa los modelos de IA y las arquitecturas de datos de mayor complejidad.</p>
+          <div class="pills" style="margin-top:.75rem">
+            <span class="pill">ML</span><span class="pill">Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<div class="section" style="background:#fff;border-top:1px solid var(--border)">
+  <div class="section-i">
+    <div class="section-hd reveal" style="justify-content:center;text-align:center">
+      <div>
+        <span class="tag to" style="margin-bottom:1rem;display:inline-flex">Nuestros valores</span>
+        <h2 class="section-h2">Lo que nos define<br>como equipo.</h2>
+      </div>
+    </div>
+    <div class="values-grid">
+      <div class="val-card reveal">
+        <div class="val-icon">🎯</div>
+        <h3>Claridad</h3>
+        <p>Sin jerga técnica innecesaria. Te explicamos qué estamos haciendo, por qué y qué resultados esperar.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">⚡</div>
+        <h3>Velocidad</h3>
+        <p>Resultados en días, no meses. Propuesta en 48 horas, primer entregable en semana 1.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">📈</div>
+        <h3>Impacto</h3>
+        <p>Solo construimos lo que mueve métricas reales de negocio. Sin features innecesarios.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🤝</div>
+        <h3>Confianza</h3>
+        <p>Código que es tuyo, documentación completa, sin dependencias de nosotros para operar.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="section" style="background:var(--bg);border-top:1px solid var(--border)">
+  <div class="section-i">
+    <div class="section-hd reveal" style="justify-content:center;text-align:center;margin-bottom:3rem">
+      <div>
+        <span class="tag to" style="margin-bottom:1rem;display:inline-flex">Historia</span>
+        <h2 class="section-h2">Cuatro años<br>construyendo.</h2>
+      </div>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-dot">22</div>
+        <div class="tl-body">
+          <div class="tl-year">2022 · Fundación</div>
+          <h3>Diego y Alejandro fundan Shift en CDMX</h3>
+          <p>Con la misión de hacer que la tecnología de vanguardia sea accesible y efectiva para empresas latinoamericanas. Primeros 3 clientes en los primeros 60 días.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">23</div>
+        <div class="tl-body">
+          <div class="tl-year">2023 · Crecimiento</div>
+          <h3>Expansión a datos e IA</h3>
+          <p>Se une Sofía Méndez como Head of Design y Carlos Vega como Data & ML Lead. Shift entrega sus primeros proyectos de ML en producción para clientes en fintech y retail.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">24</div>
+        <div class="tl-body">
+          <div class="tl-year">2024 · Consolidación</div>
+          <h3>20+ proyectos, 6 industrias</h3>
+          <p>Shift se consolida como el partner tecnológico de referencia para empresas medianas en México. Expansión a Colombia y Chile con clientes remotos.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">25</div>
+        <div class="tl-body">
+          <div class="tl-year">2025 · Presente</div>
+          <h3>30+ proyectos, 8 industrias, LATAM</h3>
+          <p>Hoy Shift es un equipo de especialistas senior enfocado en resultados medibles. Seguimos siendo pequeños por diseño — creemos que la calidad importa más que la escala.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="ctasec">
+  <div class="ctasec-grid"></div>
+  <div class="cta-i reveal">
+    <span class="tag to" style="margin-bottom:1.5rem;display:inline-flex">Trabaja con nosotros</span>
+    <h2>¿Listo para trabajar<br>con el equipo <em>correcto?</em></h2>
+    <p>Primera consulta gratuita. En 48 horas tienes una propuesta técnica real de nuestro equipo senior.</p>
+    <div class="ctabtns">
+      <a href="contacto.html" class="btn btn-o">Agendar consulta →</a>
+      <a href="servicios.html" class="btn btn-dkg">Ver servicios</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Shift<span>.</span></a>
+      <p>Diseñamos e implementamos IA, software y datos para empresas que necesitan tecnología que funciona.</p>
+      <div class="fsoc">
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Servicios</h4><a href="servicios.html">Inteligencia Artificial</a><a href="servicios.html">Datos & Analytics</a><a href="servicios.html">Desarrollo de Software</a><a href="servicios.html">Ciberseguridad</a></div>
+    <div class="footer-col"><h4>Empresa</h4><a href="nosotros.html">Nosotros</a><a href="casos.html">Casos de uso</a><a href="contacto.html">Contacto</a></div>
+    <div class="footer-col"><h4>Contacto</h4><a href="mailto:hola@shift.mx">hola@shift.mx</a><a href="tel:+525500000000">+52 55 0000 0000</a><a href="#">CDMX, México</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="fcopy">© 2026 Shift. CDMX, México.</span>
+    <div class="footer-legal"><a href="#">Aviso de privacidad</a><a href="#">Términos</a></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

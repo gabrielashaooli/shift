@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Shift — AI, Data & Software Studio · CDMX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#f9f9fb;color:#0d0d14;overflow-x:hidden}
+
+:root{
+  --orange:#e06b30; --orange-d:#c45820; --orange-l:#fdf0e8; --orange-m:#f5c9a8;
+  --blue:#2d4be0;   --blue-l:#eef1fc;   --blue-m:#b8c3f5;
+  --slate:#0d0d14;  --slate2:#3a3a4a;   --slate3:#7a7a90;
+  --border:#e5e5ed; --bg:#f9f9fb;       --white:#fff;      --radius:16px;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+@keyframes growBar{to{transform:scaleY(1)}}
+@keyframes growWidth{to{width:var(--w)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes cardReveal{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+
+.fu{opacity:0;animation:fadeUp .7s ease forwards}
+.d1{animation-delay:.08s}.d2{animation-delay:.2s}.d3{animation-delay:.34s}.d4{animation-delay:.48s}.d5{animation-delay:.62s}
+
+/* ── Tags ── */
+.tag{display:inline-flex;align-items:center;gap:.4rem;padding:.28rem .85rem;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.to{background:var(--orange-l);color:var(--orange);border:1px solid var(--orange-m)}
+.tb{background:var(--blue-l);color:var(--blue);border:1px solid var(--blue-m)}
+.ts{background:#f0f0f5;color:var(--slate2);border:1px solid var(--border)}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.875rem 1.875rem;border-radius:12px;font-size:.9375rem;font-weight:700;font-family:inherit;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s}
+.btn-o{background:var(--orange);color:#fff}
+.btn-o:hover{background:var(--orange-d);transform:translateY(-2px);box-shadow:0 8px 28px rgba(224,107,48,.38)}
+.btn-g{background:transparent;color:var(--slate);border:1.5px solid var(--border)}
+.btn-g:hover{border-color:#aaa;background:var(--white);transform:translateY(-2px)}
+.btn-w{background:#fff;color:var(--orange)}
+.btn-w:hover{background:rgba(255,255,255,.88);transform:translateY(-2px)}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;height:64px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;
+  background:rgba(249,249,251,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
+  transition:box-shadow .3s;
+}
+nav.sh{box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.logo{font-weight:900;font-size:1.3rem;letter-spacing:-.03em;color:var(--slate);text-decoration:none}
+.logo span{color:var(--orange)}
+.nl{display:flex;gap:1.75rem}
+.nl a{color:var(--slate3);font-size:.875rem;font-weight:500;text-decoration:none;transition:color .2s}
+.nl a:hover{color:var(--slate)}
+.hbg{display:none;background:none;border:none;cursor:pointer;padding:.5rem;color:var(--slate)}
+.mm{display:none;position:fixed;top:64px;left:0;right:0;z-index:299;background:rgba(249,249,251,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem 2rem 1.5rem}
+.mm a{display:block;padding:.75rem 0;color:var(--slate2);text-decoration:none;font-size:1rem;font-weight:500;border-bottom:1px solid var(--border)}
+
+/* ═══════════════════════════════════════
+   HERO — 2-col grid, no opacity issues
+═══════════════════════════════════════ */
+.hero-bg{background:linear-gradient(140deg,#fff 0%,#fdf5f0 45%,#f0f3ff 100%);position:relative;overflow:hidden}
+.hero-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 68% 35%,rgba(224,107,48,.08) 0%,transparent 45%),radial-gradient(circle at 85% 70%,rgba(45,75,224,.06) 0%,transparent 35%);pointer-events:none}
+.hero{
+  max-width:1280px;margin:0 auto;padding:8rem 2.5rem 5rem;
+  display:grid;grid-template-columns:48% 52%;gap:4rem;align-items:center;
+  min-height:calc(100vh - 64px);
+}
+.hero-l .tag{margin-bottom:1.5rem;display:inline-flex}
+h1.big{font-size:clamp(2.8rem,5.2vw,5rem);font-weight:900;line-height:.95;letter-spacing:-.042em;margin-bottom:1.5rem}
+h1.big em{font-style:normal;background:linear-gradient(115deg,var(--orange) 0%,#f09058 50%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.125rem;color:var(--slate2);line-height:1.8;max-width:440px;margin-bottom:2.5rem}
+.hero-ctas{display:flex;gap:.875rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.hero-proof{display:flex;align-items:center;gap:.75rem}
+.avs{display:flex}
+.avs span{width:30px;height:30px;border-radius:50%;border:2.5px solid #fff;margin-right:-9px;font-size:.6rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;background:var(--orange-l);color:var(--orange)}
+.avs span:last-child{background:var(--orange);color:#fff}
+.proof-t{font-size:.8125rem;color:var(--slate3);font-weight:500}
+.proof-t b{color:var(--slate)}
+
+/* Dashboard card — RIGHT side */
+.hero-r{position:relative;padding:1.5rem 0 1.5rem 1rem}
+
+.dash{
+  background:#fff;border-radius:20px;border:1px solid var(--border);
+  box-shadow:0 32px 80px rgba(0,0,0,.1),0 4px 16px rgba(0,0,0,.05);
+  animation:floatY 5.5s ease-in-out infinite;
+  position:relative;overflow:visible;
+}
+.dash-hd{padding:1.125rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;border-radius:20px 20px 0 0;background:#fff}
+.dash-hd-t{font-size:.8125rem;font-weight:700;color:var(--slate)}
+.live{display:flex;align-items:center;gap:.35rem;font-size:.68rem;font-weight:700;padding:.2rem .65rem;border-radius:100px;background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9}
+.livdot{width:6px;height:6px;border-radius:50%;background:#43a047;animation:pulse 1.8s infinite}
+.dash-bd{padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.875rem}
+
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.met{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:.875rem 1rem}
+.met-l{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate3);margin-bottom:.3rem}
+.met-v{font-size:1.5rem;font-weight:900;letter-spacing:-.03em;color:var(--slate);line-height:1}
+.met-d{font-size:.7rem;font-weight:600;margin-top:.2rem;color:#22a55e}
+
+.cb{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1rem}
+.cb-l{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate3);margin-bottom:.75rem}
+
+.bmini{display:flex;gap:5px;align-items:flex-end;height:52px}
+.bmc{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bmb{width:100%;border-radius:4px 4px 0 0;transform-origin:bottom;transform:scaleY(0);transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.bml{font-size:.58rem;color:var(--slate3)}
+
+.drow{display:flex;align-items:center;gap:.875rem;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1rem}
+.dleg{flex:1}
+.dli{display:flex;align-items:center;gap:.45rem;font-size:.73rem;color:var(--slate2);margin-bottom:.35rem;font-weight:500}
+.dli:last-child{margin-bottom:0}
+.dld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* Stickers */
+.stk{
+  position:absolute;background:#fff;border:1px solid var(--border);
+  border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.1);
+  padding:.5rem .85rem;font-size:.75rem;font-weight:600;
+  display:flex;align-items:center;gap:.45rem;white-space:nowrap;z-index:2;
+}
+
+/* ═══════════════════════════════════════
+   TICKER
+═══════════════════════════════════════ */
+.ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;background:#fff}
+.ttrack{display:flex;width:max-content;animation:marquee 30s linear infinite}
+.ti{display:inline-flex;align-items:center;gap:.65rem;padding:0 2rem;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--slate3);white-space:nowrap}
+.tidot{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+
+/* ═══════════════════════════════════════
+   ORANGE NUMBERS STRIP
+═══════════════════════════════════════ */
+.nstrip{background:var(--orange);padding:4.5rem 2.5rem}
+.nstrip-i{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;text-align:center}
+.nv{font-size:clamp(3rem,6vw,4.5rem);font-weight:900;letter-spacing:-.04em;line-height:1;color:#fff;margin-bottom:.4rem}
+.nl2{font-size:.9375rem;color:rgba(255,255,255,.75);font-weight:500;line-height:1.5}
+
+/* ═══════════════════════════════════════
+   CAPABILITIES — editorial service list
+═══════════════════════════════════════ */
+.caps{padding:7rem 2.5rem;background:var(--bg)}
+.caps-hd{max-width:1200px;margin:0 auto 3.5rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem}
+.section-h2{font-size:clamp(2rem,4.2vw,3.25rem);font-weight:900;letter-spacing:-.038em;line-height:1.06}
+
+/* — Service list rows — */
+.svc-list{max-width:1200px;margin:0 auto;border-top:2px solid var(--border)}
+.svc-item{
+  display:grid;grid-template-columns:140px 1fr 310px;gap:3rem;
+  padding:3.5rem 0;border-bottom:1px solid var(--border);align-items:start;
+  transition:background .2s;
+}
+.svc-item:hover{background:rgba(224,107,48,.02)}
+.svc-item:hover .svc-n{opacity:.3;transform:translateY(-2px)}
+.svc-meta{display:flex;flex-direction:column;gap:1rem;padding-top:.25rem}
+.svc-n{
+  font-size:4.5rem;font-weight:900;letter-spacing:-.07em;line-height:1;
+  color:var(--orange);opacity:.13;transition:opacity .35s,transform .35s;
+  display:block;
+}
+.svc-body h3{font-size:1.3125rem;font-weight:800;letter-spacing:-.028em;line-height:1.22;margin-bottom:.875rem;color:var(--slate)}
+.svc-body p{font-size:.9375rem;color:var(--slate2);line-height:1.75;max-width:420px}
+
+/* visual panel — right column */
+.svc-vis{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.375rem;overflow:hidden}
+.svc-vis-dark{background:var(--slate);border-color:var(--slate)}
+.svc-vis-label{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate3);margin-bottom:.875rem}
+
+/* Pills */
+.pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.125rem}
+.pill{padding:.28rem .75rem;border-radius:100px;font-size:.73rem;font-weight:600;background:var(--bg);border:1px solid var(--border);color:var(--slate2);cursor:default;transition:all .2s}
+.pill:hover{background:var(--orange-l);border-color:var(--orange-m);color:var(--orange)}
+
+/* Prog bars */
+.plist{display:flex;flex-direction:column;gap:.85rem}
+.pr{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;color:var(--slate2);margin-bottom:.3rem}
+.ptrack{height:7px;background:var(--border);border-radius:100px;overflow:hidden}
+.pfill{height:100%;border-radius:100px;width:0;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+
+/* Bottom strip: process + stat + CTA */
+.caps-bottom{max-width:1200px;margin:4rem auto 0;display:grid;grid-template-columns:5fr 4fr 3fr;gap:1.25rem}
+.card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.07)}
+.card-i{padding:2rem}
+.cicon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:1.125rem}
+.card-i h3{font-size:1.0625rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.5rem;color:var(--slate)}
+.card-i p{font-size:.9rem;color:var(--slate2);line-height:1.65}
+
+/* Dark process card */
+.card-dk{background:var(--slate)}
+.card-dk .card-i h3{color:#fff}
+.steps{display:flex;flex-direction:column;gap:.65rem;margin-top:.75rem}
+.step{display:flex;gap:.7rem;align-items:flex-start}
+.stn{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:.68rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.stt{font-size:.875rem;color:rgba(255,255,255,.55);line-height:1.5}
+.stt b{color:#fff}
+
+/* Orange CTA card */
+.card-or{background:var(--orange)}
+.card-or .card-i h3,.card-or .card-i p{color:#fff}
+.card-or p{color:rgba(255,255,255,.78)!important}
+
+/* Stack list (software card) */
+.stack-row{display:flex;align-items:center;gap:.65rem;padding:.4rem 0}
+.stack-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.stack-lbl{font-size:.875rem;color:rgba(255,255,255,.78);font-weight:500}
+.stack-val{margin-left:auto;font-size:.72rem;color:rgba(255,255,255,.38);font-weight:500}
+
+/* Security status rows */
+.sec-row{display:flex;align-items:center;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid var(--border)}
+.sec-row:last-child{border-bottom:none}
+.sec-lbl{font-size:.8125rem;color:var(--slate2);font-weight:500}
+.sec-val{font-size:.8125rem;font-weight:800}
+
+/* ═══════════════════════════════════════
+   HORIZONTAL SCROLL SHOWCASE
+═══════════════════════════════════════ */
+.hscroll-section{height:300vh;position:relative}
+.hscroll-sticky{
+  position:sticky;top:0;height:100vh;
+  overflow:hidden;display:flex;flex-direction:column;justify-content:center;
+  background:#fff;border-top:1px solid var(--border);
+}
+.hscroll-label{text-align:center;padding:0 2rem 2rem}
+.hscroll-label .tag{margin-bottom:1rem;display:inline-flex}
+.hscroll-label h2{font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:900;letter-spacing:-.035em}
+.hscroll-viewport{overflow:hidden}
+.hscroll-track{
+  display:flex;gap:1.5rem;
+  transition:transform .05s linear;
+  will-change:transform;
+  padding:.5rem 0 1.5rem;
+  /* horizontal centering is handled via JS marginLeft */
+}
+.hcard{
+  flex-shrink:0;width:340px;
+  background:var(--bg);border-radius:20px;border:1px solid var(--border);
+  padding:2rem;
+  transition:box-shadow .3s,transform .3s;
+}
+.hcard:hover{box-shadow:0 20px 56px rgba(0,0,0,.09);transform:translateY(-4px)}
+.hcard-num{font-size:3.5rem;font-weight:900;letter-spacing:-.05em;line-height:1;margin-bottom:.75rem;color:var(--orange);opacity:.2}
+.hcard-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.hcard h3{font-size:1.125rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.6rem}
+.hcard p{font-size:.9rem;color:var(--slate2);line-height:1.68}
+.hcard-tag{display:inline-block;margin-top:1.25rem;font-size:.75rem;font-weight:700;color:var(--orange);background:var(--orange-l);padding:.25rem .75rem;border-radius:100px;border:1px solid var(--orange-m)}
+/* progress indicator */
+.hscroll-progress{display:flex;justify-content:center;gap:.5rem;padding-top:1.25rem}
+.hp{width:28px;height:3px;border-radius:2px;background:var(--border);transition:background .3s,width .3s}
+.hp.active{background:var(--orange);width:48px}
+
+/* ═══════════════════════════════════════
+   CHARTS SECTION
+═══════════════════════════════════════ */
+.charts{padding:7rem 2.5rem;background:var(--bg);border-top:1px solid var(--border)}
+.charts-i{max-width:1200px;margin:0 auto}
+.charts-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.ccrd{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:1.75rem;transition:box-shadow .3s}
+.ccrd:hover{box-shadow:0 12px 36px rgba(0,0,0,.07)}
+.cct{font-size:.9375rem;font-weight:700;color:var(--slate);margin-bottom:.25rem}
+.ccs{font-size:.8125rem;color:var(--slate3);margin-bottom:1.5rem}
+
+/* ═══════════════════════════════════════
+   MOUSE-TRACKING GLOW (hero)
+═══════════════════════════════════════ */
+#glow{
+  position:fixed;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,107,48,.07) 0%,transparent 65%);
+  pointer-events:none;z-index:0;transform:translate(-50%,-50%);
+  transition:left .08s ease,top .08s ease;
+}
+
+/* ═══════════════════════════════════════
+   CTA DARK
+═══════════════════════════════════════ */
+.ctasec{padding:8rem 2.5rem;background:var(--slate);position:relative;overflow:hidden}
+.ctasec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 70% at 15% 55%,rgba(224,107,48,.2) 0%,transparent 55%),radial-gradient(ellipse 50% 60% at 88% 45%,rgba(45,75,224,.12) 0%,transparent 55%);pointer-events:none}
+.ctasec-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.cta-i{max-width:760px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.cta-i h2{font-size:clamp(2.2rem,4.8vw,4rem);font-weight:900;line-height:.97;letter-spacing:-.04em;color:#fff;margin-bottom:1.25rem}
+.cta-i h2 em{font-style:normal;color:var(--orange)}
+.cta-i p{color:rgba(255,255,255,.5);font-size:1.125rem;line-height:1.78;max-width:460px;margin:0 auto 3rem}
+.ctabtns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-dkg{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.2)}
+.btn-dkg:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);transform:translateY(-2px)}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.25rem}
+.flinks{display:flex;gap:1.75rem;flex-wrap:wrap}
+.flinks a{font-size:.8125rem;color:var(--slate3);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--orange)}
+.fcopy{font-size:.8125rem;color:var(--slate3)}
+.fsoc{display:flex;gap:.75rem}
+.fsoc a{color:var(--slate3);transition:color .2s;display:flex}
+.fsoc a:hover{color:var(--orange)}
+
+/* ── Scroll reveal ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+/* service items: always visible, only right panel animates in */
+.svc-item{opacity:1;transform:none}
+.svc-item .svc-vis{opacity:0;transform:translateX(24px);transition:opacity .7s ease,transform .7s ease}
+.svc-item.in .svc-vis{opacity:1;transform:none}
+
+/* ── Responsive ── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto;gap:3rem}
+  .hero-r{max-width:520px;width:100%;margin:0 auto;padding:0}
+  .nstrip-i{grid-template-columns:1fr}
+  .svc-item{grid-template-columns:100px 1fr;gap:2rem}
+  .svc-vis{display:none}
+  .caps-bottom{grid-template-columns:1fr 1fr}
+  .cgrid{grid-template-columns:1fr}
+  .caps-hd{flex-direction:column;align-items:flex-start}
+
+}
+@media(max-width:768px){
+  .nl,.btn-nav-d{display:none}
+  .hbg{display:block}
+  footer{flex-direction:column;align-items:flex-start}
+  .svc-item{grid-template-columns:1fr;gap:1.25rem;padding:2.5rem 0}
+  .svc-n{font-size:3rem}
+  .svc-vis{display:block}
+  .caps-bottom{grid-template-columns:1fr}
+  .hcard{width:280px}
+}
+</style>
+</head>
+<body>
+
+<!-- Mouse glow -->
+<div id="glow"></div>
+
+<!-- ══ NAV ════════════════════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#" class="logo">Shift<span>.</span></a>
+  <div class="nl">
+    <a href="#nosotros">Nosotros</a><a href="#servicios">Servicios</a>
+    <a href="#proceso">Proceso</a><a href="#contacto">Contacto</a>
+  </div>
+  <a href="#contacto" class="btn btn-o btn-nav-d" style="padding:.5rem 1.25rem;font-size:.875rem">Consulta gratis →</a>
+  <button class="hbg" id="hbg" aria-label="Menú">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+  </button>
+</nav>
+<div class="mm" id="mm">
+  <a href="#nosotros">Nosotros</a><a href="#servicios">Servicios</a>
+  <a href="#proceso">Proceso</a><a href="#contacto">Contacto</a>
+  <a href="#contacto" class="btn btn-o" style="margin-top:1rem;justify-content:center">Consulta gratis →</a>
+</div>
+
+<!-- ══ HERO ═══════════════════════════════════════════════════════ -->
+<div class="hero-bg">
+<div class="hero" id="nosotros">
+
+  <!-- LEFT -->
+  <div class="hero-l">
+    <span class="tag to fu d1">
+      <span style="width:7px;height:7px;background:var(--orange);border-radius:50%;animation:pulse 2s infinite;display:inline-block"></span>
+      AI · Data · Software · CDMX
+    </span>
+    <h1 class="big fu d2">Operaciones<br>más<br><em>inteligentes.</em><br>Resultados reales.</h1>
+    <p class="hero-sub fu d3">Diseñamos e implementamos IA, software a medida y sistemas de datos para empresas que necesitan eficiencia operativa y tecnología que escala.</p>
+    <div class="hero-ctas fu d4">
+      <a href="#contacto" class="btn btn-o">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Agendar consulta gratis
+      </a>
+      <a href="#servicios" class="btn btn-g">Ver servicios →</a>
+    </div>
+    <div class="hero-proof fu d5">
+      <div class="avs"><span>AS</span><span>JM</span><span>LR</span><span>+</span></div>
+      <p class="proof-t"><b>30+ proyectos</b> entregados · 8 industrias</p>
+    </div>
+  </div>
+
+  <!-- RIGHT: dashboard — always visible, no opacity animation -->
+  <div class="hero-r">
+    <div class="dash">
+      <div class="dash-hd">
+        <span class="dash-hd-t">Shift · Panel de Impacto</span>
+        <span class="live"><span class="livdot"></span>En vivo</span>
+      </div>
+      <div class="dash-bd">
+
+        <!-- metrics -->
+        <div class="mrow">
+          <div class="met">
+            <div class="met-l">Eficiencia</div>
+            <div class="met-v" id="mv1">0%</div>
+            <div class="met-d">↑ 24% vs mes anterior</div>
+          </div>
+          <div class="met">
+            <div class="met-l">Horas ahorradas</div>
+            <div class="met-v" id="mv2">0</div>
+            <div class="met-d">↑ 3.2x productividad</div>
+          </div>
+        </div>
+
+        <!-- line chart -->
+        <div class="cb">
+          <div class="cb-l">Rendimiento · 12 meses</div>
+          <svg viewBox="0 0 300 72" fill="none" style="display:block;width:100%;height:72px">
+            <defs>
+              <linearGradient id="hg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e06b30" stop-opacity=".15"/>
+                <stop offset="100%" stop-color="#e06b30" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <line x1="0" y1="20" x2="300" y2="20" stroke="#e5e5ed" stroke-width=".6"/>
+            <line x1="0" y1="40" x2="300" y2="40" stroke="#e5e5ed" stroke-width=".6"/>
+            <line x1="0" y1="58" x2="300" y2="58" stroke="#e5e5ed" stroke-width=".6"/>
+            <path d="M0,64 C25,62 50,56 75,47 C100,38 125,32 150,24 C175,16 200,19 225,13 C250,7 275,9 300,5 L300,72 L0,72Z" fill="url(#hg)"/>
+            <path id="hl" d="M0,64 C25,62 50,56 75,47 C100,38 125,32 150,24 C175,16 200,19 225,13 C250,7 275,9 300,5"
+              stroke="#e06b30" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="700" stroke-dashoffset="700" style="transition:stroke-dashoffset 2s ease"/>
+          </svg>
+        </div>
+
+        <!-- mini bars -->
+        <div class="cb">
+          <div class="cb-l">Por área</div>
+          <div class="bmini" id="hbars"></div>
+        </div>
+
+        <!-- donut -->
+        <div class="drow">
+          <svg width="68" height="68" viewBox="0 0 68 68" style="flex-shrink:0">
+            <circle cx="34" cy="34" r="26" fill="none" stroke="#e5e5ed" stroke-width="9"/>
+            <circle id="hd1" cx="34" cy="34" r="26" fill="none" stroke="#e06b30" stroke-width="9"
+              stroke-dasharray="163 100" stroke-dashoffset="163" stroke-linecap="round"
+              transform="rotate(-90 34 34)" style="transition:stroke-dashoffset 1.8s ease"/>
+            <circle id="hd2" cx="34" cy="34" r="26" fill="none" stroke="#2d4be0" stroke-width="9"
+              stroke-dasharray="66 197" stroke-dashoffset="197" stroke-linecap="round"
+              transform="rotate(70 34 34)" opacity="0" style="transition:stroke-dashoffset 1.6s ease,opacity .3s"/>
+            <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="10" font-weight="900" fill="#0d0d14" font-family="Inter">87%</text>
+          </svg>
+          <div class="dleg">
+            <div class="dli"><span class="dld" style="background:#e06b30"></span>IA & Automatización · 62%</div>
+            <div class="dli"><span class="dld" style="background:#2d4be0"></span>Datos & Analytics · 25%</div>
+            <div class="dli"><span class="dld" style="background:#e5e5ed"></span>Seguridad · 13%</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- floating stickers -->
+    <div class="stk" style="top:-12px;right:12px;color:#22a55e">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Entregado a tiempo
+    </div>
+    <div class="stk" style="bottom:22px;left:-14px;color:var(--orange)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Propuesta en 48 hrs
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══ TICKER ════════════════════════════════════════════════════ -->
+<div class="ticker">
+  <div class="ttrack" id="ticker"></div>
+</div>
+
+<!-- ══ ORANGE NUMBERS ════════════════════════════════════════════ -->
+<section class="nstrip" id="numeros">
+  <div class="nstrip-i">
+    <div class="reveal">
+      <div class="nv" data-target="48" data-suffix="hrs">0hrs</div>
+      <div class="nl2">Propuesta técnica personalizada</div>
+    </div>
+    <div class="reveal">
+      <div class="nv" data-target="30" data-suffix="+">0+</div>
+      <div class="nl2">Proyectos en producción</div>
+    </div>
+    <div class="reveal">
+      <div class="nv" data-target="8" data-suffix="">0</div>
+      <div class="nl2">Industrias transformadas</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CAPABILITIES — editorial service list ════════════════════ -->
+<section class="caps" id="servicios">
+  <div class="caps-hd reveal">
+    <div>
+      <span class="tag to" style="margin-bottom:1.25rem;display:inline-flex">Capacidades</span>
+      <h2 class="section-h2">Todo lo que necesitas para<br>crecer con <span style="color:var(--orange)">tecnología.</span></h2>
+    </div>
+    <p style="font-size:1rem;color:var(--slate2);line-height:1.75;max-width:340px">Desde modelos de IA hasta infraestructura segura — construimos el stack completo.</p>
+  </div>
+
+  <div class="svc-list">
+
+    <!-- ── 01 Inteligencia Artificial ── -->
+    <div class="svc-item">
+      <div class="svc-meta">
+        <span class="svc-n">01</span>
+        <span class="tag to" style="font-size:.67rem">Inteligencia Artificial</span>
+      </div>
+      <div class="svc-body">
+        <h3>Automatización cognitiva<br>aplicada a tu operación</h3>
+        <p>Modelos de ML, NLP, visión por computadora y agentes autónomos que aprenden de tu negocio y optimizan decisiones en tiempo real.</p>
+        <div class="pills">
+          <span class="pill">Machine Learning</span><span class="pill">NLP</span>
+          <span class="pill">Visión por Computadora</span><span class="pill">LLMs</span>
+          <span class="pill">Agentes IA</span>
+        </div>
+      </div>
+      <div class="svc-vis">
+        <div class="svc-vis-label">Rendimiento del modelo · 12 meses</div>
+        <svg viewBox="0 0 280 68" fill="none" style="display:block;width:100%;height:68px">
+          <defs>
+            <linearGradient id="mg1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e06b30" stop-opacity=".15"/>
+              <stop offset="100%" stop-color="#e06b30" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,64 C35,62 70,50 110,36 C150,22 190,24 230,14 C260,6 280,3 280,3 L280,68 L0,68Z" fill="url(#mg1)"/>
+          <path class="sline" d="M0,64 C35,62 70,50 110,36 C150,22 190,24 230,14 C260,6 280,3 280,3" stroke="#e06b30" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="520" stroke-dashoffset="520" style="transition:stroke-dashoffset 1.8s ease"/>
+        </svg>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:.875rem">
+          <div>
+            <div style="font-size:2rem;font-weight:900;letter-spacing:-.04em;color:var(--orange);line-height:1">87%</div>
+            <div style="font-size:.72rem;color:var(--slate3);margin-top:.2rem">precisión en producción</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:1.25rem;font-weight:800;color:#22a55e">↑ 24%</div>
+            <div style="font-size:.72rem;color:var(--slate3)">vs mes anterior</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 02 Ciencia de Datos ── -->
+    <div class="svc-item">
+      <div class="svc-meta">
+        <span class="svc-n">02</span>
+        <span class="tag tb" style="font-size:.67rem">Ciencia de Datos</span>
+      </div>
+      <div class="svc-body">
+        <h3>Decisiones basadas en datos,<br>no en intuición</h3>
+        <p>Dashboards en tiempo real, modelos predictivos y pipelines que transforman ruido en ventaja competitiva para tu negocio.</p>
+        <div class="pills">
+          <span class="pill">Power BI</span><span class="pill">Python</span>
+          <span class="pill">dbt</span><span class="pill">Spark</span><span class="pill">Tableau</span>
+        </div>
+      </div>
+      <div class="svc-vis">
+        <div class="svc-vis-label">Impacto medido</div>
+        <div class="plist" id="prog">
+          <div>
+            <div class="pr"><span>Reducción de costos</span><span style="color:var(--orange)">87%</span></div>
+            <div class="ptrack"><div class="pfill" data-w="87" style="background:linear-gradient(90deg,var(--orange),#f09058)"></div></div>
+          </div>
+          <div>
+            <div class="pr"><span>Precisión predictiva</span><span style="color:var(--blue)">94%</span></div>
+            <div class="ptrack"><div class="pfill" data-w="94" style="background:linear-gradient(90deg,var(--blue),#6b85e8)"></div></div>
+          </div>
+          <div>
+            <div class="pr"><span>Velocidad de insights</span><span style="color:#7c3aed">12×</span></div>
+            <div class="ptrack"><div class="pfill" data-w="78" style="background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 03 Desarrollo de Software ── -->
+    <div class="svc-item">
+      <div class="svc-meta">
+        <span class="svc-n">03</span>
+        <span class="tag to" style="font-size:.67rem">Desarrollo de Software</span>
+      </div>
+      <div class="svc-body">
+        <h3>Plataformas que escalan<br>contigo</h3>
+        <p>APIs robustas, apps web y móvil, sistemas a medida con arquitectura cloud-native pensada para crecer sin límites técnicos.</p>
+        <div class="pills">
+          <span class="pill">React / Next.js</span><span class="pill">Node.js</span>
+          <span class="pill">Python</span><span class="pill">AWS</span>
+          <span class="pill">React Native</span><span class="pill">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="svc-vis svc-vis-dark">
+        <div class="svc-vis-label" style="color:rgba(255,255,255,.38)">Stack tecnológico</div>
+        <div class="stack-row"><span class="stack-dot" style="background:#e06b30"></span><span class="stack-lbl">Frontend</span><span class="stack-val">React · Next.js · Vue</span></div>
+        <div class="stack-row"><span class="stack-dot" style="background:#2d4be0"></span><span class="stack-lbl">Backend</span><span class="stack-val">Node.js · Python · Go</span></div>
+        <div class="stack-row"><span class="stack-dot" style="background:#7c3aed"></span><span class="stack-lbl">Cloud</span><span class="stack-val">AWS · GCP · Azure</span></div>
+        <div class="stack-row" style="border:none"><span class="stack-dot" style="background:#22a55e"></span><span class="stack-lbl">Mobile</span><span class="stack-val">React Native · Flutter</span></div>
+      </div>
+    </div>
+
+    <!-- ── 04 Ciberseguridad ── -->
+    <div class="svc-item reveal" style="border-bottom:none">
+      <div class="svc-meta">
+        <span class="svc-n">04</span>
+        <span class="tag tb" style="font-size:.67rem">Ciberseguridad</span>
+      </div>
+      <div class="svc-body">
+        <h3>Infraestructura blindada<br>desde el día uno</h3>
+        <p>Desarrollo seguro, auditorías técnicas, control de acceso y protección de infraestructura cloud para que escales sin riesgos.</p>
+        <div class="pills">
+          <span class="pill">Penetration Testing</span><span class="pill">IAM</span>
+          <span class="pill">Cloud Security</span><span class="pill">SIEM</span>
+        </div>
+      </div>
+      <div class="svc-vis">
+        <div class="svc-vis-label">Estado del sistema</div>
+        <div class="sec-row"><span class="sec-lbl">Vulnerabilidades activas</span><span class="sec-val" style="color:#22a55e">0 detectadas</span></div>
+        <div class="sec-row"><span class="sec-lbl">Uptime del sistema</span><span class="sec-val" style="color:#22a55e">99.9%</span></div>
+        <div class="sec-row"><span class="sec-lbl">Tiempo de respuesta</span><span class="sec-val" style="color:var(--orange)">&lt;30 seg</span></div>
+        <div class="sec-row"><span class="sec-lbl">Score de seguridad</span><span class="sec-val" style="color:var(--blue)">A+</span></div>
+      </div>
+    </div>
+
+  </div><!-- /svc-list -->
+
+  <!-- ── Bottom strip: process + stat + CTA ── -->
+  <div class="caps-bottom reveal">
+
+    <div class="card card-dk">
+      <div class="card-i">
+        <div class="cicon" style="background:rgba(255,255,255,.08)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Cómo trabajamos contigo</h3>
+        <div class="steps">
+          <div class="step"><div class="stn">1</div><div class="stt"><b>Diagnóstico</b> — Analizamos tu operación en 48hrs</div></div>
+          <div class="step"><div class="stn">2</div><div class="stt"><b>Propuesta técnica</b> — Solución a medida, sin templates</div></div>
+          <div class="step"><div class="stn">3</div><div class="stt"><b>Construcción</b> — Iteramos rápido, entregamos en producción</div></div>
+          <div class="step"><div class="stn">4</div><div class="stt"><b>Evolución</b> — Tu sistema crece con tu negocio</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="display:flex;align-items:center;justify-content:center">
+      <div class="card-i" style="text-align:center">
+        <div style="font-size:3.75rem;font-weight:900;letter-spacing:-.05em;line-height:1;color:var(--orange);margin-bottom:.5rem">100%</div>
+        <div style="font-size:.9rem;color:var(--slate2);font-weight:500">entregas a tiempo,<br>sin excepción</div>
+      </div>
+    </div>
+
+    <div class="card card-or" style="display:flex;align-items:center;justify-content:center">
+      <div class="card-i" style="text-align:center">
+        <h3 style="font-size:1.125rem;margin-bottom:.5rem">¿Listo para crecer?</h3>
+        <p style="margin-bottom:1.5rem;font-size:.875rem">Sin compromiso · 48hrs de respuesta</p>
+        <a href="#contacto" class="btn btn-w" style="font-size:.875rem;padding:.65rem 1.25rem">Empezar ahora →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ HORIZONTAL SCROLL SHOWCASE ════════════════════════════════ -->
+<section class="hscroll-section" id="proceso">
+  <div class="hscroll-sticky" id="hsticky">
+    <div class="hscroll-label">
+      <span class="tag to" style="margin-bottom:.875rem">Nuestro proceso</span>
+      <h2 class="section-h2">Cuatro pasos que <span style="color:var(--orange)">transforman</span> tu negocio.</h2>
+      <p style="font-size:1rem;color:var(--slate2);margin-top:.5rem">Desliza para explorar →</p>
+    </div>
+    <div class="hscroll-viewport">
+      <div class="hscroll-track" id="htrack">
+
+        <div class="hcard">
+          <div class="hcard-num">01</div>
+          <div class="hcard-icon" style="background:var(--orange-l)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e06b30" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Diagnóstico profundo</h3>
+          <p>Analizamos tus procesos, datos y sistemas actuales en 48 horas. Sin plantillas — entendemos tu operación real.</p>
+          <span class="hcard-tag">48 hrs</span>
+        </div>
+
+        <div class="hcard">
+          <div class="hcard-num">02</div>
+          <div class="hcard-icon" style="background:var(--blue-l)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2d4be0" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3>Propuesta técnica</h3>
+          <p>Diseñamos la solución exacta para tu problema. Arquitectura, tecnología, cronograma y presupuesto claros.</p>
+          <span class="hcard-tag">Personalizada</span>
+        </div>
+
+        <div class="hcard" style="background:var(--orange);border-color:var(--orange)">
+          <div class="hcard-num" style="color:rgba(255,255,255,.25)">03</div>
+          <div class="hcard-icon" style="background:rgba(255,255,255,.15)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.75"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 style="color:#fff">Construcción ágil</h3>
+          <p style="color:rgba(255,255,255,.75)">Entregamos en ciclos cortos con resultados visibles desde la primera semana. Tú ves el avance en tiempo real.</p>
+          <span style="display:inline-block;margin-top:1.25rem;font-size:.75rem;font-weight:700;color:var(--orange);background:#fff;padding:.25rem .75rem;border-radius:100px">Sprint by sprint</span>
+        </div>
+
+        <div class="hcard">
+          <div class="hcard-num">04</div>
+          <div class="hcard-icon" style="background:var(--orange-l)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e06b30" stroke-width="1.75"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <h3>Evolución continua</h3>
+          <p>Tu sistema crece con tu negocio. Mantenimiento, mejoras y nuevas funcionalidades — somos tu equipo de tecnología.</p>
+          <span class="hcard-tag">Long-term partner</span>
+        </div>
+
+        <div class="hcard" style="background:var(--slate);border-color:var(--slate)">
+          <div class="hcard-num" style="color:rgba(255,255,255,.2)">✦</div>
+          <div class="hcard-icon" style="background:rgba(255,255,255,.08)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.75"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 style="color:#fff">¿Listo para empezar?</h3>
+          <p style="color:rgba(255,255,255,.55)">La primera consulta es gratuita. Cuéntanos tu problema y en 48hrs tienes una propuesta técnica.</p>
+          <a href="#contacto" class="btn btn-o" style="margin-top:1.25rem;font-size:.875rem;padding:.65rem 1.25rem">Agendar ahora →</a>
+        </div>
+
+      </div>
+    </div>
+    <div class="hscroll-progress" id="hprog">
+      <div class="hp active"></div><div class="hp"></div><div class="hp"></div><div class="hp"></div><div class="hp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHARTS ═════════════════════════════════════════════════════ -->
+<section class="charts">
+  <div class="charts-i">
+    <div class="charts-hd reveal">
+      <div>
+        <span class="tag to" style="margin-bottom:1rem;display:inline-flex">Impacto medible</span>
+        <h2 class="section-h2">Datos que demuestran<br>el valor <span style="color:var(--orange)">real.</span></h2>
+      </div>
+      <a href="#contacto" class="btn btn-g">Ver casos de uso →</a>
+    </div>
+
+    <div class="cgrid reveal">
+
+      <!-- Line chart -->
+      <div class="ccrd">
+        <div class="cct">Ahorro acumulado por automatización</div>
+        <div class="ccs">Con Shift vs. operación tradicional (MXN)</div>
+        <svg viewBox="0 0 400 170" fill="none" style="display:block;width:100%;height:170px">
+          <defs>
+            <linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e06b30" stop-opacity=".15"/><stop offset="100%" stop-color="#e06b30" stop-opacity="0"/></linearGradient>
+            <linearGradient id="cg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2d4be0" stop-opacity=".07"/><stop offset="100%" stop-color="#2d4be0" stop-opacity="0"/></linearGradient>
+          </defs>
+          <line x1="38" y1="18" x2="395" y2="18" stroke="#e5e5ed"/><line x1="38" y1="50" x2="395" y2="50" stroke="#e5e5ed"/>
+          <line x1="38" y1="82" x2="395" y2="82" stroke="#e5e5ed"/><line x1="38" y1="114" x2="395" y2="114" stroke="#e5e5ed"/>
+          <text x="32" y="22" font-size="9" fill="#7a7a90" text-anchor="end" font-family="Inter">$4M</text>
+          <text x="32" y="54" font-size="9" fill="#7a7a90" text-anchor="end" font-family="Inter">$3M</text>
+          <text x="32" y="86" font-size="9" fill="#7a7a90" text-anchor="end" font-family="Inter">$2M</text>
+          <text x="32" y="118" font-size="9" fill="#7a7a90" text-anchor="end" font-family="Inter">$1M</text>
+          <text x="58" y="132" font-size="9" fill="#7a7a90" text-anchor="middle" font-family="Inter">Ene</text>
+          <text x="125" y="132" font-size="9" fill="#7a7a90" text-anchor="middle" font-family="Inter">Mar</text>
+          <text x="192" y="132" font-size="9" fill="#7a7a90" text-anchor="middle" font-family="Inter">Jun</text>
+          <text x="259" y="132" font-size="9" fill="#7a7a90" text-anchor="middle" font-family="Inter">Sep</text>
+          <text x="326" y="132" font-size="9" fill="#7a7a90" text-anchor="middle" font-family="Inter">Nov</text>
+          <text x="385" y="132" font-size="9" fill="#7a7a90" text-anchor="middle" font-family="Inter">Dic</text>
+          <!-- orange (con shift) -->
+          <path d="M38,114 C80,104 120,90 160,72 C200,54 240,42 280,30 C320,18 358,14 395,10 L395,114Z" fill="url(#cg1)"/>
+          <path class="sline" d="M38,114 C80,104 120,90 160,72 C200,54 240,42 280,30 C320,18 358,14 395,10" stroke="#e06b30" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="800" stroke-dashoffset="800" style="transition:stroke-dashoffset 2s ease"/>
+          <!-- blue (sin shift) -->
+          <path d="M38,114 C80,112 120,110 160,108 C200,106 240,104 280,102 C320,100 358,98 395,96 L395,114Z" fill="url(#cg2)"/>
+          <path class="sline" d="M38,114 C80,112 120,110 160,108 C200,106 240,104 280,102 C320,100 358,98 395,96" stroke="#2d4be0" stroke-width="1.75" stroke-linecap="round" stroke-dasharray="360" stroke-dashoffset="360" style="transition:stroke-dashoffset 1.8s ease"/>
+          <!-- legend -->
+          <rect x="38" y="148" width="10" height="5" rx="2.5" fill="#e06b30"/>
+          <text x="53" y="155" font-size="9" fill="#3a3a4a" font-family="Inter" font-weight="600">Con Shift</text>
+          <rect x="108" y="148" width="10" height="5" rx="2.5" fill="#2d4be0"/>
+          <text x="123" y="155" font-size="9" fill="#3a3a4a" font-family="Inter" font-weight="600">Sin Shift</text>
+        </svg>
+      </div>
+
+      <!-- Bar chart -->
+      <div class="ccrd">
+        <div class="cct">Eficiencia por área de negocio</div>
+        <div class="ccs">Mejora porcentual tras implementación</div>
+        <svg viewBox="0 0 400 170" fill="none" style="display:block;width:100%;height:170px">
+          <line x1="50" y1="18" x2="390" y2="18" stroke="#e5e5ed"/><line x1="50" y1="50" x2="390" y2="50" stroke="#e5e5ed"/>
+          <line x1="50" y1="82" x2="390" y2="82" stroke="#e5e5ed"/><line x1="50" y1="114" x2="390" y2="114" stroke="#e5e5ed"/>
+          <text x="44" y="22" font-size="9" fill="#7a7a90" text-anchor="end" font-family="Inter">100%</text>
+          <text x="44" y="54" font-size="9" fill="#7a7a90" text-anchor="end" font-family="Inter">75%</text>
+          <text x="44" y="86" font-size="9" fill="#7a7a90" text-anchor="end" font-family="Inter">50%</text>
+          <text x="44" y="118" font-size="9" fill="#7a7a90" text-anchor="end" font-family="Inter">25%</text>
+          <rect class="sbar" x="60"  y="24" width="34" height="90" rx="5" fill="#e06b30" transform-origin="60 114"  transform="scaleY(0)"/>
+          <rect class="sbar" x="115" y="16" width="34" height="98" rx="5" fill="#e06b30" transform-origin="115 114" transform="scaleY(0)" opacity=".82"/>
+          <rect class="sbar" x="170" y="38" width="34" height="76" rx="5" fill="#2d4be0" transform-origin="170 114" transform="scaleY(0)" opacity=".8"/>
+          <rect class="sbar" x="225" y="44" width="34" height="70" rx="5" fill="#2d4be0" transform-origin="225 114" transform="scaleY(0)" opacity=".65"/>
+          <rect class="sbar" x="280" y="20" width="34" height="94" rx="5" fill="#e06b30" transform-origin="280 114" transform="scaleY(0)" opacity=".68"/>
+          <rect class="sbar" x="335" y="18" width="34" height="96" rx="5" fill="#e06b30" transform-origin="335 114" transform="scaleY(0)" opacity=".5"/>
+          <text x="77"  y="132" font-size="8.5" fill="#7a7a90" text-anchor="middle" font-family="Inter">Logística</text>
+          <text x="132" y="132" font-size="8.5" fill="#7a7a90" text-anchor="middle" font-family="Inter">Finanzas</text>
+          <text x="187" y="132" font-size="8.5" fill="#7a7a90" text-anchor="middle" font-family="Inter">Operaciones</text>
+          <text x="242" y="132" font-size="8.5" fill="#7a7a90" text-anchor="middle" font-family="Inter">RRHH</text>
+          <text x="297" y="132" font-size="8.5" fill="#7a7a90" text-anchor="middle" font-family="Inter">Marketing</text>
+          <text x="352" y="132" font-size="8.5" fill="#7a7a90" text-anchor="middle" font-family="Inter">Servicio</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA DARK ═══════════════════════════════════════════════════ -->
+<section class="ctasec" id="contacto">
+  <div class="ctasec-grid"></div>
+  <div class="cta-i">
+    <span class="tag" style="background:rgba(224,107,48,.15);color:#f0975a;border-color:rgba(224,107,48,.3);margin-bottom:1.75rem;display:inline-flex">
+      <span style="width:6px;height:6px;background:var(--orange);border-radius:50%;animation:pulse 2s infinite"></span>
+      Consulta gratuita · Sin compromiso
+    </span>
+    <h2>Tu negocio merece<br>tecnología <em>de verdad.</em></h2>
+    <p>Cuéntanos tu problema. En 48 horas tienes una propuesta técnica real, no una presentación de ventas.</p>
+    <div class="ctabtns">
+      <a href="#" class="btn btn-o">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Agendar diagnóstico gratis
+      </a>
+      <a href="#servicios" class="btn btn-dkg">Explorar servicios →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+<footer>
+  <a href="#" class="logo">Shift<span>.</span></a>
+  <div class="flinks">
+    <a href="#nosotros">Nosotros</a><a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a><a href="#">Aviso de privacidad</a><a href="#">Términos</a>
+  </div>
+  <span class="fcopy">© 2026 Shift. CDMX, México.</span>
+  <div class="fsoc">
+    <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+  </div>
+</footer>
+
+<!-- ══ JS ════════════════════════════════════════════════════════ -->
+<script>
+/* ── Nav ── */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sh',scrollY>24),{passive:true});
+document.getElementById('hbg').addEventListener('click',()=>{const m=document.getElementById('mm');m.style.display=m.style.display==='block'?'none':'block'});
+document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mm').style.display='none'));
+
+/* ── Mouse glow ── */
+const glow=document.getElementById('glow');
+document.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'},{passive:true});
+
+/* ── Ticker ── */
+const services=['AI Solutions','Custom Software','Data Analytics','Automatización inteligente','Machine Learning','Ciberseguridad','Pipelines de Datos','Cloud Architecture'];
+document.getElementById('ticker').innerHTML=[...services,...services].map(s=>`<span class="ti"><span class="tidot"></span>${s}</span>`).join('');
+
+/* ── Hero bars (rendered in JS) ── */
+const bd=[{h:28,c:'#e06b30',l:'IA'},{h:44,c:'#e06b30',l:'Dev'},{h:35,c:'#2d4be0',l:'Data'},{h:30,c:'#2d4be0',l:'Seg'},{h:48,c:'#e06b30',l:'Ops'},{h:38,c:'#7c3aed',l:'ML'}];
+document.getElementById('hbars').innerHTML=bd.map((b,i)=>`<div class="bmc"><div class="bmb" id="hb${i}" style="height:${b.h}px;background:${b.c};opacity:.85"></div><span class="bml">${b.l}</span></div>`).join('');
+
+/* ── Ease out cubic ── */
+function easeOut(t){return 1-Math.pow(1-t,3)}
+function countTo(el,target,suffix,dur,delay){
+  setTimeout(()=>{
+    const t0=performance.now();
+    (function tick(now){
+      const p=Math.min((now-t0)/dur,1);
+      el.textContent=Math.round(easeOut(p)*target)+suffix;
+      if(p<1)requestAnimationFrame(tick);
+    })(performance.now());
+  },delay);
+}
+
+/* ── Hero animate on load ── */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    // line
+    const hl=document.getElementById('hl');
+    if(hl)hl.style.strokeDashoffset='0';
+    // donut
+    const hd1=document.getElementById('hd1'),hd2=document.getElementById('hd2');
+    if(hd1)hd1.style.strokeDashoffset='0';
+    if(hd2)setTimeout(()=>{hd2.style.opacity='1';hd2.style.strokeDashoffset='0';},900);
+    // bars
+    bd.forEach((_,i)=>{
+      const b=document.getElementById('hb'+i);
+      if(b)setTimeout(()=>{b.style.transition='transform .75s cubic-bezier(.16,1,.3,1)';b.style.transform='scaleY(1)'},500+i*90);
+    });
+  },400);
+  countTo(document.getElementById('mv1'),87,'%',1800,700);
+  countTo(document.getElementById('mv2'),340,' hrs',2000,900);
+});
+
+/* ── Horizontal scroll section ── */
+const hSection=document.getElementById('proceso');
+const hTrack=document.getElementById('htrack');
+const hDots=document.querySelectorAll('#hprog .hp');
+
+/* Centering: first card center = viewport center at progress=0
+   last card center = viewport center at progress=1
+   marginLeft pushes track right so first card is centered.
+   maxShift = (n-1) × (cardWidth + gap) moves last card to center. */
+function fixHCentering(){
+  const vpHalf = hTrack.parentElement.offsetWidth / 2;
+  const firstCard = hTrack.querySelector('.hcard');
+  const cardHalf = firstCard ? firstCard.offsetWidth / 2 : 170;
+  hTrack.style.marginLeft = Math.max(0, vpHalf - cardHalf) + 'px';
+}
+fixHCentering();
+window.addEventListener('resize', () => { fixHCentering(); updateHScroll(); }, {passive:true});
+
+function updateHScroll(){
+  const rect=hSection.getBoundingClientRect();
+  const progress=Math.max(0,Math.min(1,-rect.top/(rect.height-window.innerHeight)));
+  const cards=hTrack.querySelectorAll('.hcard');
+  const cardW=cards[0]?cards[0].offsetWidth:340;
+  const maxShift=(cards.length-1)*(cardW+24); /* (n-1)×(cardWidth+gap) */
+  hTrack.style.transform=`translateX(-${progress*maxShift}px)`;
+  const dotIdx=Math.round(progress*(hDots.length-1));
+  hDots.forEach((d,i)=>d.classList.toggle('active',i===dotIdx));
+}
+window.addEventListener('scroll',updateHScroll,{passive:true});
+
+/* ── Intersection observer for scroll reveals ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    el.classList.add('in');
+
+    // counters
+    el.querySelectorAll('[data-target]').forEach((c,i)=>countTo(c,parseInt(c.dataset.target),c.dataset.suffix||'',1800,i*180));
+
+    // progress bars
+    el.querySelectorAll('.pfill[data-w]').forEach((b,i)=>setTimeout(()=>b.style.width=b.dataset.w+'%',i*120+300));
+
+    // SVG lines
+    el.querySelectorAll('.sline').forEach((l,i)=>setTimeout(()=>l.style.strokeDashoffset='0',i*150+200));
+
+    // SVG bars
+    el.querySelectorAll('.sbar').forEach((b,i)=>setTimeout(()=>{b.style.transition='transform .85s cubic-bezier(.16,1,.3,1)';b.style.transform='scaleY(1)'},i*80+150));
+
+    obs.unobserve(el);
+  });
+},{threshold:0.08});
+
+document.querySelectorAll('.reveal,.nstrip,.charts,.svc-item').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
