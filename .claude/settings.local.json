@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "WebFetch(domain:shiftsoftware.com.mx)",
+      "Bash(curl:*)"
+    ]
+  }
+}
