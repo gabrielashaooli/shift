@@ -340,7 +340,7 @@ const Index = () => {
 
         {/* Desktop CTA */}
         <a
-          href="https://wa.me/521XXXXXXXXXX"
+          href="https://wa.me/525566287424"
           target="_blank"
           rel="noopener noreferrer"
           className="shift-btn-primary shift-nav-desktop"
@@ -397,7 +397,7 @@ const Index = () => {
             </a>
           ))}
           <a
-            href="https://wa.me/521XXXXXXXXXX"
+            href="https://wa.me/525566287424"
             target="_blank"
             rel="noopener noreferrer"
             className="shift-btn-primary"
@@ -908,21 +908,6 @@ const Index = () => {
           </span>
         </div>
 
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: C.muted,
-            transition: "color 0.2s",
-            display: "flex",
-          }}
-          onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = C.text)}
-          onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = C.muted)}
-          aria-label="Instagram"
-        >
-          <Instagram size={20} />
-        </a>
       </footer>
     </div>
   );

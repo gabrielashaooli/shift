@@ -1,219 +1,123 @@
-/* ═══════════════════════════════════════════════════
-   SHIFT — main.js
-   Shared behavior across all pages
-═══════════════════════════════════════════════════ */
+/* ── Nav scroll shadow ── */
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav');
+  if(nav)nav.classList.toggle('sh',scrollY>24);
+},{passive:true});
 
-(function(){
-
-  /* ── Nav scroll shadow ── */
-  var nav = document.getElementById('nav');
-  if(nav){
-    window.addEventListener('scroll', function(){
-      nav.classList.toggle('sh', window.scrollY > 20);
-    }, {passive:true});
-  }
-
-  /* ── Hamburger menu ── */
-  var hbg = document.getElementById('hbg');
-  var mm  = document.getElementById('mm');
-  if(hbg && mm){
-    hbg.addEventListener('click', function(){
-      mm.classList.toggle('open');
-      var open = mm.classList.contains('open');
-      hbg.innerHTML = open
-        ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
-        : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>';
-    });
-    mm.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ mm.classList.remove('open'); });
-    });
-  }
-
-  /* ── Active nav link ── */
-  var path = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a, .mm a').forEach(function(a){
-    var href = a.getAttribute('href') || '';
-    if(href === path || (path === '' && href === 'index.html')){
-      a.classList.add('active');
-    }
+/* ── Hamburger menu ── */
+const hbgBtn=document.getElementById('hbg');
+if(hbgBtn){
+  hbgBtn.addEventListener('click',()=>{
+    const m=document.getElementById('mm');
+    if(m)m.style.display=m.style.display==='block'?'none':'block';
   });
+}
+document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>{
+  const m=document.getElementById('mm');
+  if(m)m.style.display='none';
+}));
 
-  /* ── Mouse glow (desktop only) ── */
-  var glow = document.getElementById('glow');
-  if(glow && window.innerWidth > 768){
-    document.addEventListener('mousemove', function(e){
-      glow.style.left = e.clientX + 'px';
-      glow.style.top  = e.clientY + 'px';
-    }, {passive:true});
-  } else if(glow){
-    glow.style.display = 'none';
-  }
+/* ── Mouse glow ── */
+const glow=document.getElementById('glow');
+if(glow){
+  document.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'},{passive:true});
+}
 
-  /* ── Scroll reveal (IntersectionObserver) ── */
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        /* Animate progress bars inside revealed element */
-        e.target.querySelectorAll('.pfill').forEach(function(pf){
-          pf.style.width = pf.dataset.w || '0%';
-        });
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.08});
+/* ── Ease out cubic ── */
+function easeOut(t){return 1-Math.pow(1-t,3)}
+function countTo(el,target,suffix,dur,delay){
+  if(!el)return;
+  setTimeout(()=>{
+    const t0=performance.now();
+    (function tick(now){
+      const p=Math.min((now-t0)/dur,1);
+      el.textContent=Math.round(easeOut(p)*target)+suffix;
+      if(p<1)requestAnimationFrame(tick);
+    })(performance.now());
+  },delay);
+}
 
-  document.querySelectorAll('.reveal, .nstrip, .svc-item').forEach(function(el){
-    obs.observe(el);
-  });
+/* ── Hero animate on load ── */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const hl=document.getElementById('hl');
+    if(hl)hl.style.strokeDashoffset='0';
 
-  /* ── Smooth anchor links (for index.html anchors) ── */
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(e){
-      var id = a.getAttribute('href').slice(1);
-      var target = document.getElementById(id);
-      if(target){
-        e.preventDefault();
-        target.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    });
-  });
+    const hd1=document.getElementById('hd1'),hd2=document.getElementById('hd2');
+    if(hd1)hd1.style.strokeDashoffset='0';
+    if(hd2)setTimeout(()=>{hd2.style.opacity='1';hd2.style.strokeDashoffset='0';},900);
 
-  /* ── Hero line chart animation ── */
-  var hl = document.getElementById('hl');
-  if(hl){
-    setTimeout(function(){ hl.style.strokeDashoffset = '0'; }, 600);
-  }
-
-  /* ── Hero counter animation ── */
-  function animateCount(el, target, suffix, duration){
-    var start = 0;
-    var step = target / (duration / 16);
-    var timer = setInterval(function(){
-      start = Math.min(start + step, target);
-      el.textContent = Math.round(start) + suffix;
-      if(start >= target) clearInterval(timer);
-    }, 16);
-  }
-  var mv1 = document.getElementById('mv1');
-  var mv2 = document.getElementById('mv2');
-  if(mv1 && mv2){
-    setTimeout(function(){
-      animateCount(mv1, 87, '%', 1200);
-      animateCount(mv2, 340, ' hrs', 1400);
-    }, 500);
-  }
-
-  /* ── Mini bar chart (hero) ── */
-  var hbars = document.getElementById('hbars');
-  if(hbars){
-    var bars = [
-      {h:62,c:'#e06b30',l:'IA'},
-      {h:48,c:'#e06b30',l:'Dev'},
-      {h:55,c:'#2d4be0',l:'Data'},
-      {h:38,c:'#2d4be0',l:'Seg'},
-      {h:45,c:'#e06b30',l:'Ops'},
-      {h:52,c:'#9c5de0',l:'ML'}
-    ];
-    bars.forEach(function(b){
-      var col = document.createElement('div');
-      col.className = 'bmc';
-      col.innerHTML = '<div class="bmb" style="height:'+b.h+'%;background:'+b.c+';transform-origin:bottom;transform:scaleY(0);transition:transform .7s cubic-bezier(.16,1,.3,1)"></div><span class="bml">'+b.l+'</span>';
-      hbars.appendChild(col);
-    });
-    setTimeout(function(){
-      hbars.querySelectorAll('.bmb').forEach(function(b, i){
-        setTimeout(function(){ b.style.transform = 'scaleY(1)'; }, i * 80);
-      });
-    }, 800);
-  }
-
-  /* ── Donut chart (hero) ── */
-  var dc = document.getElementById('donut-canvas');
-  if(dc){
-    var ctx = dc.getContext('2d');
-    var segments = [{v:62,c:'#e06b30'},{v:25,c:'#2d4be0'},{v:13,c:'#9c5de0'}];
-    var total = 100, start = -Math.PI/2, r = 38, cx = 50, cy = 50;
-    function drawDonut(progress){
-      ctx.clearRect(0,0,100,100);
-      ctx.lineWidth = 10;
-      ctx.lineCap = 'round';
-      var drawn = 0;
-      segments.forEach(function(s){
-        var angle = (s.v/total) * Math.PI * 2 * progress;
-        ctx.beginPath();
-        ctx.arc(cx,cy,r, start+drawn, start+drawn+angle);
-        ctx.strokeStyle = s.c;
-        ctx.stroke();
-        drawn += angle;
+    // bars
+    const hbars=document.getElementById('hbars');
+    if(hbars){
+      const bd=[{h:28,c:'#e06b30',l:'IA'},{h:44,c:'#e06b30',l:'Dev'},{h:35,c:'#2d4be0',l:'Data'},{h:30,c:'#2d4be0',l:'Seg'},{h:48,c:'#e06b30',l:'Ops'},{h:38,c:'#7c3aed',l:'ML'}];
+      hbars.innerHTML=bd.map((b,i)=>`<div class="bmc"><div class="bmb" id="hb${i}" style="height:${b.h}px;background:${b.c};opacity:.85"></div><span class="bml">${b.l}</span></div>`).join('');
+      bd.forEach((_,i)=>{
+        const b=document.getElementById('hb'+i);
+        if(b)setTimeout(()=>{b.style.transition='transform .75s cubic-bezier(.16,1,.3,1)';b.style.transform='scaleY(1)'},500+i*90);
       });
     }
-    var p = 0;
-    var dTimer = setInterval(function(){
-      p = Math.min(p + .025, 1);
-      drawDonut(p);
-      if(p >= 1) clearInterval(dTimer);
-    }, 16);
-  }
+  },400);
 
-  /* ── Contact form ── */
-  var form = document.getElementById('contact-form');
-  if(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var btn = form.querySelector('button[type="submit"]');
-      btn.textContent = 'Enviando…';
-      btn.disabled = true;
-      setTimeout(function(){
-        form.innerHTML = '<div class="form-success"><div class="form-success-icon">✓</div><h3>¡Mensaje recibido!</h3><p>Te contactamos en menos de 48 horas con una propuesta técnica personalizada.</p></div>';
-      }, 1200);
-    });
-  }
+  countTo(document.getElementById('mv1'),87,'%',1800,700);
+  countTo(document.getElementById('mv2'),340,' hrs',2000,900);
+});
 
-  /* ── FAQ accordion ── */
-  document.querySelectorAll('.faq-item').forEach(function(item){
-    var q = item.querySelector('.faq-q');
-    var a = item.querySelector('.faq-a');
-    if(q && a){
-      q.addEventListener('click', function(){
-        var open = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-        if(!open) item.classList.add('open');
-      });
-    }
-  });
-
-})();
-
-/* ═══════════════════════════════════════════════════
-   Horizontal scroll (index.html only)
-═══════════════════════════════════════════════════ */
-(function(){
-  var hSection = document.getElementById('proceso');
-  if(!hSection) return;
-
-  var hTrack = hSection.querySelector('.hscroll-track');
-  var hDots  = hSection.querySelectorAll('.hp');
+/* ── Horizontal scroll section ── */
+const hSection=document.getElementById('proceso');
+if(hSection){
+  const hTrack=hSection.querySelector('.hscroll-track');
+  const hDots=hSection.querySelectorAll('.hp');
 
   function fixHCentering(){
-    var vpHalf   = hTrack.parentElement.offsetWidth / 2;
-    var firstCard = hTrack.querySelector('.hcard');
-    var cardHalf = firstCard ? firstCard.offsetWidth / 2 : 170;
-    hTrack.style.marginLeft = Math.max(0, vpHalf - cardHalf) + 'px';
+    if(!hTrack)return;
+    const vpHalf=hTrack.parentElement.offsetWidth/2;
+    const firstCard=hTrack.querySelector('.hcard');
+    const cardHalf=firstCard?firstCard.offsetWidth/2:170;
+    hTrack.style.marginLeft=Math.max(0,vpHalf-cardHalf)+'px';
   }
   fixHCentering();
-  window.addEventListener('resize', function(){ fixHCentering(); updateHScroll(); }, {passive:true});
+  window.addEventListener('resize',()=>{fixHCentering();updateHScroll()},{passive:true});
 
   function updateHScroll(){
-    var rect = hSection.getBoundingClientRect();
-    var progress = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
-    var cards = hTrack.querySelectorAll('.hcard');
-    var cardW = cards[0] ? cards[0].offsetWidth : 340;
-    var maxShift = (cards.length - 1) * (cardW + 24);
-    hTrack.style.transform = 'translateX(-' + (progress * maxShift) + 'px)';
-    var dotIdx = Math.round(progress * (hDots.length - 1));
-    hDots.forEach(function(d, i){ d.classList.toggle('active', i === dotIdx); });
+    if(!hTrack)return;
+    const rect=hSection.getBoundingClientRect();
+    const progress=Math.max(0,Math.min(1,-rect.top/(rect.height-window.innerHeight)));
+    const cards=hTrack.querySelectorAll('.hcard');
+    const cardW=cards[0]?cards[0].offsetWidth:340;
+    const maxShift=(cards.length-1)*(cardW+24);
+    hTrack.style.transform=`translateX(-${progress*maxShift}px)`;
+    const dotIdx=Math.round(progress*(hDots.length-1));
+    hDots.forEach((d,i)=>d.classList.toggle('active',i===dotIdx));
   }
-  window.addEventListener('scroll', updateHScroll, {passive:true});
-  updateHScroll();
-})();
+  window.addEventListener('scroll',updateHScroll,{passive:true});
+}
+
+/* ── Intersection observer for scroll reveals ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;
+    el.classList.add('in');
+
+    el.querySelectorAll('[data-target]').forEach((c,i)=>countTo(c,parseInt(c.dataset.target),c.dataset.suffix||'',1800,i*180));
+    el.querySelectorAll('.pfill[data-w]').forEach((b,i)=>setTimeout(()=>b.style.width=b.dataset.w,i*120+300));
+    el.querySelectorAll('.sline').forEach((l,i)=>setTimeout(()=>l.style.strokeDashoffset='0',i*150+200));
+    el.querySelectorAll('.sbar').forEach((b,i)=>setTimeout(()=>{b.style.transition='transform .85s cubic-bezier(.16,1,.3,1)';b.style.transform='scaleY(1)'},i*80+150));
+
+    obs.unobserve(el);
+  });
+},{threshold:0.08});
+
+document.querySelectorAll('.reveal,.nstrip,.charts,.svc-item').forEach(el=>obs.observe(el));
+
+/* ── FAQ accordion (contacto page) ── */
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item');
+    if(!item)return;
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen)item.classList.add('open');
+  });
+});
