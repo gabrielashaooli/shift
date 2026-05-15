@@ -67,8 +67,8 @@ const CAPABILITIES = [
 
 const STATS = [
   { value: 48, suffix: "hrs", label: "para entregarte una propuesta técnica" },
-  { value: 30, suffix: "+", label: "proyectos en producción" },
-  { value: 8, suffix: "", label: "industrias transformadas" },
+  { value: 4, suffix: "", label: "áreas de especialidad" },
+  { value: 100, suffix: "%", label: "remoto · CDMX & LATAM" },
 ];
 
 // ─── Hooks ────────────────────────────────────────────────────────────────────
@@ -340,7 +340,7 @@ const Index = () => {
 
         {/* Desktop CTA */}
         <a
-          href="https://wa.me/525566287424"
+          href="https://wa.me/525566287425"
           target="_blank"
           rel="noopener noreferrer"
           className="shift-btn-primary shift-nav-desktop"
@@ -397,7 +397,7 @@ const Index = () => {
             </a>
           ))}
           <a
-            href="https://wa.me/525566287424"
+            href="https://wa.me/525566287425"
             target="_blank"
             rel="noopener noreferrer"
             className="shift-btn-primary"
@@ -566,9 +566,9 @@ const Index = () => {
           }}
         >
           {[
-            { val: "8+", label: "industrias" },
-            { val: "30+", label: "proyectos" },
-            { val: "100%", label: "entregas a tiempo" },
+            { val: "48hrs", label: "propuesta técnica" },
+            { val: "4", label: "áreas de especialidad" },
+            { val: "100%", label: "remoto" },
           ].map((s, i) => (
             <div key={i} style={{ textAlign: "center" }}>
               <div
