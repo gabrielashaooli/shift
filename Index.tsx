@@ -340,7 +340,7 @@ const Index = () => {
 
         {/* Desktop CTA */}
         <a
-          href="https://wa.me/525566287425"
+          href="https://wa.me/525566287424"
           target="_blank"
           rel="noopener noreferrer"
           className="shift-btn-primary shift-nav-desktop"
@@ -397,7 +397,7 @@ const Index = () => {
             </a>
           ))}
           <a
-            href="https://wa.me/525566287425"
+            href="https://wa.me/525566287424"
             target="_blank"
             rel="noopener noreferrer"
             className="shift-btn-primary"
