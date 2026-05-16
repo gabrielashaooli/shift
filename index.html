@@ -118,7 +118,7 @@ h1.big em{font-style:normal;background:linear-gradient(115deg,var(--orange) 0%,#
     <a href="servicios.html">Servicios</a>
     <a href="casos.html">Casos</a>
     <a href="contacto.html">Contacto</a>
-    <a href="contacto.html" class="btn btn-o btn-nav">Contacto →</a>
+    <a href="contacto.html" class="btn btn-o btn-nav">Escríbenos →</a>
   </div>
   <button class="hbg" id="hbg" aria-label="Menú">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
@@ -129,7 +129,7 @@ h1.big em{font-style:normal;background:linear-gradient(115deg,var(--orange) 0%,#
   <a href="servicios.html">Servicios</a>
   <a href="casos.html">Casos de uso</a>
   <a href="contacto.html">Contacto</a>
-  <a href="contacto.html" class="btn btn-o" style="margin-top:1rem;justify-content:center">Contacto →</a>
+  <a href="contacto.html" class="btn btn-o" style="margin-top:1rem;justify-content:center">Escríbenos →</a>
 </div>
 
 <!-- HERO -->
@@ -246,23 +246,23 @@ h1.big em{font-style:normal;background:linear-gradient(115deg,var(--orange) 0%,#
       </div>
       <a href="servicios.html" class="btn btn-g">Ver más →</a>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem" class="reveal">
-      <div class="card"><div class="card-i">
+    <div style="display:flex;gap:1.25rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:.5rem" class="reveal">
+      <div class="card" style="min-width:260px;flex-shrink:0"><div class="card-i">
         <div class="cicon" style="background:var(--orange-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-2 3-2 5h-4c0-2-2-3.05-2-5a4 4 0 0 1 4-4z"/><line x1="10" y1="17" x2="14" y2="17"/><line x1="10" y1="20" x2="14" y2="20"/></svg></div>
         <h3>Inteligencia Artificial</h3>
         <p>Automatización, ML, NLP y agentes IA aplicados a tu operación.</p>
       </div></div>
-      <div class="card"><div class="card-i">
+      <div class="card" style="min-width:260px;flex-shrink:0"><div class="card-i">
         <div class="cicon" style="background:var(--blue-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
         <h3>Datos & Analytics</h3>
         <p>Pipelines, dashboards y modelos predictivos para tomar mejores decisiones.</p>
       </div></div>
-      <div class="card"><div class="card-i">
+      <div class="card" style="min-width:260px;flex-shrink:0"><div class="card-i">
         <div class="cicon" style="background:#f3e8fd"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9c5de0" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
         <h3>Software a medida</h3>
         <p>Apps, APIs y plataformas web con arquitectura que escala.</p>
       </div></div>
-      <div class="card"><div class="card-i">
+      <div class="card" style="min-width:260px;flex-shrink:0"><div class="card-i">
         <div class="cicon" style="background:#e8f5e9"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h3>Ciberseguridad</h3>
         <p>Auditorías, desarrollo seguro y protección de infraestructura cloud.</p>
@@ -290,36 +290,12 @@ h1.big em{font-style:normal;background:linear-gradient(115deg,var(--orange) 0%,#
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="index.html" class="logo">Shift<span>.</span></a>
-      <p>Diseñamos e implementamos IA, software y datos para empresas que necesitan tecnología que funciona.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Servicios</h4>
-      <a href="servicios.html">Inteligencia Artificial</a>
-      <a href="servicios.html">Datos & Analytics</a>
-      <a href="servicios.html">Desarrollo de Software</a>
-      <a href="servicios.html">Ciberseguridad</a>
-    </div>
-    <div class="footer-col">
-      <h4>Empresa</h4>
-      <a href="nosotros.html">Nosotros</a>
-      <a href="casos.html">Casos de uso</a>
-      <a href="contacto.html">Contacto</a>
-    </div>
-    <div class="footer-col">
-      <h4>Contacto</h4>
-      <a href="mailto:info@shiftsoftware.com">info@shiftsoftware.com</a>
-      <a href="tel:+525566287424">+52 55 6628 7424</a>
-      <a href="#">CDMX, México</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="fcopy">© 2026 Shift. CDMX, México.</span>
-    <div class="footer-legal">
-      <a href="#">Aviso de privacidad</a>
-      <a href="#">Términos</a>
+  <div class="footer-bottom" style="padding:2rem 2.5rem">
+    <a href="index.html" class="logo">Shift<span>.</span></a>
+    <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
+      <a href="mailto:info@shiftsoftware.com" class="footer-legal" style="font-size:.8125rem;color:var(--slate3);text-decoration:none">info@shiftsoftware.com</a>
+      <a href="tel:+525566287424" style="font-size:.8125rem;color:var(--slate3);text-decoration:none">+52 55 6628 7424</a>
+      <span class="fcopy">© 2026 Shift</span>
     </div>
   </div>
 </footer>
