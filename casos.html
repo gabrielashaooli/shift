@@ -9,9 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/styles.css"/>
 <style>
-/* ── Cases grid ── */
-.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.case-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:default}
+/* ── Cases carousel ── */
+.cases-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:1rem}
+.cases-scroll::-webkit-scrollbar{display:none}
+.cases-track{display:flex;gap:1.25rem;padding:0 .5rem}
+.case-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:default;min-width:340px;max-width:380px;flex-shrink:0}
 .case-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(0,0,0,.09)}
 .case-header{padding:1.75rem 1.75rem 1.25rem;border-bottom:1px solid var(--border)}
 .case-industry{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
@@ -23,6 +25,7 @@
 .case-num{font-size:1.5rem;font-weight:900;letter-spacing:-.04em;line-height:1}
 .case-desc{font-size:.8125rem;color:var(--slate2);line-height:1.5}
 .case-tech{display:flex;flex-wrap:wrap;gap:.35rem;padding:1.25rem 1.75rem;border-top:1px solid var(--border)}
+.scroll-hint{font-size:.85rem;color:var(--slate3);margin-top:1rem;text-align:center}
 
 /* ── Testimonials ── */
 .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
@@ -44,8 +47,11 @@
 .ind-emoji{font-size:1.75rem;margin-bottom:.625rem}
 .ind-name{font-size:.875rem;font-weight:700;color:var(--slate)}
 
-@media(max-width:1024px){.cases-grid{grid-template-columns:1fr 1fr}.testi-grid{grid-template-columns:1fr}.ind-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:768px){.cases-grid{grid-template-columns:1fr}.ind-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  .case-card{min-width:280px;max-width:300px}
+  .ind-grid{grid-template-columns:repeat(2,1fr)}
+  .testi-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -95,7 +101,8 @@
         <h2 class="section-h2">Tecnología aplicada<br>a problemas reales.</h2>
       </div>
     </div>
-    <div class="cases-grid reveal">
+    <div class="cases-scroll reveal">
+    <div class="cases-track">
 
       <!-- Sinai Kosher -->
       <div class="case-card">
@@ -207,6 +214,8 @@
         </div>
       </div>
 
+    </div>
+    <p class="scroll-hint">Desliza para ver más →</p>
     </div>
   </div>
 </div>
