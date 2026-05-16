@@ -27,30 +27,8 @@
 .case-tech{display:flex;flex-wrap:wrap;gap:.35rem;padding:1.25rem 1.75rem;border-top:1px solid var(--border)}
 .scroll-hint{font-size:.85rem;color:var(--slate3);margin-top:1rem;text-align:center}
 
-/* ── Testimonials ── */
-.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.testi-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:2rem}
-.testi-stars{display:flex;gap:.2rem;margin-bottom:1.25rem}
-.testi-star{color:var(--orange);font-size:1rem}
-.testi-text{font-size:.9375rem;color:var(--slate2);line-height:1.75;margin-bottom:1.5rem;font-style:italic}
-.testi-text::before{content:'"'}
-.testi-text::after{content:'"'}
-.testi-author{display:flex;align-items:center;gap:.875rem}
-.testi-av{width:40px;height:40px;border-radius:50%;background:var(--orange-l);color:var(--orange);font-weight:800;font-size:.875rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.testi-name{font-size:.875rem;font-weight:700;color:var(--slate)}
-.testi-role{font-size:.78rem;color:var(--slate3)}
-
-/* ── Industries ── */
-.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.ind-item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.25rem;text-align:center;transition:transform .2s,box-shadow .2s}
-.ind-item:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.07)}
-.ind-emoji{font-size:1.75rem;margin-bottom:.625rem}
-.ind-name{font-size:.875rem;font-weight:700;color:var(--slate)}
-
 @media(max-width:768px){
   .case-card{min-width:280px;max-width:300px}
-  .ind-grid{grid-template-columns:repeat(2,1fr)}
-  .testi-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
