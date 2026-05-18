@@ -477,5 +477,4 @@ footer{background:var(--bg);border-top:1px solid var(--border)}
   .nstrip-i{grid-template-columns:1fr 1fr}
   .hero-proof{flex-direction:column;gap:.5rem;align-items:flex-start}
   .form-row{grid-template-columns:1fr}
-  .why-index-grid{grid-template-columns:1fr!important;gap:0!important}
 }
