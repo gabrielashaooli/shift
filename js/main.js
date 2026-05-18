@@ -4,18 +4,24 @@ window.addEventListener('scroll',()=>{
   if(nav)nav.classList.toggle('sh',scrollY>24);
 },{passive:true});
 
-/* ── Hamburger menu ── */
+/* ── Hamburger menu con scroll lock ── */
 const hbgBtn=document.getElementById('hbg');
-if(hbgBtn){
-  hbgBtn.addEventListener('click',()=>{
-    const m=document.getElementById('mm');
-    if(m)m.style.display=m.style.display==='block'?'none':'block';
-  });
-}
-document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>{
+function toggleMenu(forceClose){
   const m=document.getElementById('mm');
-  if(m)m.style.display='none';
-}));
+  if(!m)return;
+  const isOpen=m.style.display==='block';
+  if(forceClose||isOpen){
+    m.style.display='none';
+    document.body.classList.remove('menu-open');
+  }else{
+    m.style.display='block';
+    document.body.classList.add('menu-open');
+  }
+}
+if(hbgBtn){
+  hbgBtn.addEventListener('click',()=>toggleMenu());
+}
+document.querySelectorAll('#mm a').forEach(a=>a.addEventListener('click',()=>toggleMenu(true)));
 
 /* ── Mouse glow ── */
 const glow=document.getElementById('glow');

@@ -19,11 +19,11 @@
 .team-card-body .role{font-size:.8125rem;font-weight:600;color:var(--orange);margin-bottom:.625rem}
 .team-card-body p{font-size:.8125rem;color:var(--slate2);line-height:1.65}
 
-@media(max-width:1024px){
-  .team-grid{grid-template-columns:1fr 1fr}
-}
+/* Variante para 2 personas */
+.team-grid--duo{grid-template-columns:repeat(2,1fr)}
+
 @media(max-width:500px){
-  .team-grid{grid-template-columns:1fr}
+  .team-grid--duo{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -64,7 +64,7 @@
 <!-- TEAM -->
 <div class="section" style="background:#fff">
   <div class="section-i">
-    <div class="team-grid" style="grid-template-columns:repeat(2,1fr);max-width:600px;margin:0 auto">
+    <div class="team-grid team-grid--duo" style="max-width:600px;margin:0 auto">
       <div class="team-card reveal">
         <div class="team-avatar-wrap" style="background:linear-gradient(135deg,#fdf0e8,#f5c9a8);height:160px">
           <span style="color:var(--orange);font-size:2.5rem">GS</span>
@@ -116,7 +116,7 @@
 <footer>
   <div class="footer-bottom" style="padding:2rem 2.5rem">
     <a href="index.html" class="logo">Shift<span>.</span></a>
-    <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
+    <div class="footer-inline" style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
       <a href="mailto:info@shiftsoftware.com" style="font-size:.8125rem;color:var(--slate3);text-decoration:none">info@shiftsoftware.com</a>
       <a href="tel:+525566287424" style="font-size:.8125rem;color:var(--slate3);text-decoration:none">+52 55 6628 7424</a>
       <span class="fcopy">© 2026 Shift</span>

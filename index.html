@@ -9,95 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/styles.css"/>
 <style>
-/* ── Hero ── */
-.hero-bg{background:linear-gradient(140deg,#fff 0%,#fdf5f0 45%,#f0f3ff 100%);position:relative;overflow:hidden}
-.hero-bg::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 68% 35%,rgba(224,107,48,.08) 0%,transparent 45%),radial-gradient(circle at 85% 70%,rgba(45,75,224,.06) 0%,transparent 35%);pointer-events:none}
-.hero{max-width:1280px;margin:0 auto;padding:8rem 2.5rem 5rem;display:grid;grid-template-columns:48% 52%;gap:4rem;align-items:center;min-height:calc(100vh - 64px)}
-h1.big{font-size:clamp(2.8rem,5.2vw,5rem);font-weight:900;line-height:.95;letter-spacing:-.042em;margin-bottom:1.5rem}
-h1.big em{font-style:normal;background:linear-gradient(115deg,var(--orange) 0%,#f09058 50%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:1.125rem;color:var(--slate2);line-height:1.8;max-width:440px;margin-bottom:2.5rem}
-.hero-ctas{display:flex;gap:.875rem;flex-wrap:wrap;margin-bottom:2.5rem}
-.hero-proof{display:flex;align-items:center;gap:.75rem}
-.avs{display:flex}
-.avs span{width:30px;height:30px;border-radius:50%;border:2.5px solid #fff;margin-right:-9px;font-size:.6rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;background:var(--orange-l);color:var(--orange)}
-.avs span:last-child{background:var(--orange);color:#fff}
-.proof-t{font-size:.8125rem;color:var(--slate3);font-weight:500}
-.proof-t b{color:var(--slate)}
-
-/* Dashboard */
-.hero-r{position:relative;padding:1.5rem 0 1.5rem 1rem}
-.dash{background:#fff;border-radius:20px;border:1px solid var(--border);box-shadow:0 32px 80px rgba(0,0,0,.1),0 4px 16px rgba(0,0,0,.05);animation:floatY 5.5s ease-in-out infinite;position:relative}
-.dash-hd{padding:1.125rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;border-radius:20px 20px 0 0;background:#fff}
-.dash-hd-t{font-size:.8125rem;font-weight:700;color:var(--slate)}
-.live{display:flex;align-items:center;gap:.35rem;font-size:.68rem;font-weight:700;padding:.2rem .65rem;border-radius:100px;background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9}
-.livdot{width:6px;height:6px;border-radius:50%;background:#43a047;animation:pulse 1.8s infinite}
-.dash-bd{padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.875rem}
-.mrow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.met{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:.875rem 1rem}
-.met-l{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate3);margin-bottom:.3rem}
-.met-v{font-size:1.5rem;font-weight:900;letter-spacing:-.03em;color:var(--slate);line-height:1}
-.met-d{font-size:.7rem;font-weight:600;margin-top:.2rem;color:#22a55e}
-.cb{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1rem}
-.cb-l{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate3);margin-bottom:.75rem}
-.bmini{display:flex;gap:5px;align-items:flex-end;height:52px}
-.bmc{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
-.bml{font-size:.58rem;color:var(--slate3)}
-.drow{display:flex;align-items:center;gap:.875rem;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:1rem}
-.dleg{flex:1}
-.dli{display:flex;align-items:center;gap:.45rem;font-size:.73rem;color:var(--slate2);margin-bottom:.35rem;font-weight:500}
-.dli:last-child{margin-bottom:0}
-.dld{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.stk{position:absolute;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.1);padding:.5rem .85rem;font-size:.75rem;font-weight:600;display:flex;align-items:center;gap:.45rem;white-space:nowrap;z-index:2}
-
-/* ── Caps section ── */
-.caps{padding:7rem 2.5rem;background:var(--bg)}
-.caps-hd{max-width:1200px;margin:0 auto 3.5rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem}
-.caps-bottom{max-width:1200px;margin:4rem auto 0;display:grid;grid-template-columns:5fr 4fr 3fr;gap:1.25rem}
-.cicon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:1.125rem}
-.steps{display:flex;flex-direction:column;gap:.65rem;margin-top:.75rem}
-.step{display:flex;gap:.7rem;align-items:flex-start}
-.stn{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:.68rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
-.stt{font-size:.875rem;color:rgba(255,255,255,.55);line-height:1.5}
-.stt b{color:#fff}
-
-/* ── Horizontal scroll ── */
-.hscroll-section{height:300vh;position:relative}
-.hscroll-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;background:#fff;border-top:1px solid var(--border)}
-.hscroll-label{text-align:center;padding:0 2rem 2rem}
-.hscroll-label .tag{margin-bottom:1rem;display:inline-flex}
-.hscroll-label h2{font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:900;letter-spacing:-.035em}
-.hscroll-viewport{overflow:hidden}
-.hscroll-track{display:flex;gap:1.5rem;transition:transform .05s linear;will-change:transform;padding:.5rem 0 1.5rem}
-.hcard{flex-shrink:0;width:340px;background:var(--bg);border-radius:20px;border:1px solid var(--border);padding:2rem;transition:box-shadow .3s,transform .3s}
-.hcard:hover{box-shadow:0 20px 56px rgba(0,0,0,.09);transform:translateY(-4px)}
-.hcard-num{font-size:3.5rem;font-weight:900;letter-spacing:-.05em;line-height:1;margin-bottom:.75rem;color:var(--orange);opacity:.2}
-.hcard-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
-.hcard h3{font-size:1.125rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.6rem}
-.hcard p{font-size:.9rem;color:var(--slate2);line-height:1.68}
-.hcard-tag{display:inline-block;margin-top:1.25rem;font-size:.75rem;font-weight:700;color:var(--orange);background:var(--orange-l);padding:.25rem .75rem;border-radius:100px;border:1px solid var(--orange-m)}
-.hcard-dark{background:var(--slate);border-color:var(--slate)}
-.hcard-dark h3,.hcard-dark p{color:#fff}
-.hcard-dark p{color:rgba(255,255,255,.65)!important}
-.hscroll-progress{display:flex;justify-content:center;gap:.5rem;padding-top:1.25rem}
-.hp{width:28px;height:3px;border-radius:2px;background:var(--border);transition:background .3s,width .3s}
-.hp.active{background:var(--orange);width:48px}
-
-/* ── Charts ── */
-.charts{padding:7rem 2.5rem;background:var(--bg);border-top:1px solid var(--border)}
-.charts-i{max-width:1200px;margin:0 auto}
-.charts-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem}
-.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.ccrd{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:1.75rem;transition:box-shadow .3s}
-.ccrd:hover{box-shadow:0 12px 36px rgba(0,0,0,.07)}
-.cct{font-size:.9375rem;font-weight:700;color:var(--slate);margin-bottom:.25rem}
-.ccs{font-size:.8125rem;color:var(--slate3);margin-bottom:1.5rem}
-
-@media(max-width:1024px){
-  .hero{grid-template-columns:1fr;min-height:auto;gap:3rem}
-  .hero-r{max-width:520px;width:100%;margin:0 auto;padding:0}
-}
+/* Estilos específicos de index.html — lo global ya está en styles.css */
 @media(max-width:768px){
-  .svc-carousel .card{min-width:220px!important}
+  .svc-carousel .card{min-width:220px}
 }
 </style>
 </head>
@@ -345,7 +259,7 @@ h1.big em{font-style:normal;background:linear-gradient(115deg,var(--orange) 0%,#
 <footer>
   <div class="footer-bottom" style="padding:2rem 2.5rem">
     <a href="index.html" class="logo">Shift<span>.</span></a>
-    <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
+    <div class="footer-inline" style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
       <a href="mailto:info@shiftsoftware.com" class="footer-legal" style="font-size:.8125rem;color:var(--slate3);text-decoration:none">info@shiftsoftware.com</a>
       <a href="tel:+525566287424" style="font-size:.8125rem;color:var(--slate3);text-decoration:none">+52 55 6628 7424</a>
       <span class="fcopy">© 2026 Shift</span>
