@@ -144,13 +144,22 @@ export const runScan = createServerFn({ method: "POST" })
 
     const apiKey = process.env["ANTHROPIC_API_KEY"];
     let raw: unknown;
-    if (apiKey) {
-      raw = await runOnClaude(system, user, apiKey);
-    } else {
-      // Workers AI corre dentro del propio Worker: no hay API key ni proveedor
-      // externo, y entra en la cuota gratuita diaria de Cloudflare.
-      const { runOnWorkersAI } = await import("./scan.workers-ai.server");
-      raw = await runOnWorkersAI(system, user, JSON_SCHEMA);
+    try {
+      if (apiKey) {
+        raw = await runOnClaude(system, user, apiKey);
+      } else {
+        // Workers AI corre dentro del propio Worker: no hay API key ni proveedor
+        // externo, y entra en la cuota gratuita diaria de Cloudflare.
+        const { runOnWorkersAI } = await import("./scan.workers-ai.server");
+        raw = await runOnWorkersAI(system, user, JSON_SCHEMA);
+      }
+    } catch (error) {
+      // Los errores del proveedor traen objetos que el serializador de
+      // TanStack no puede mandar al cliente, y el motivo real se perdía en un
+      // "Seroval Error". Se relanza como Error plano con el mensaje.
+      const detail = error instanceof Error ? error.message : String(error);
+      console.error("scan: falló el proveedor", error);
+      throw new Error(`scan failed: ${detail}`.slice(0, 300));
     }
 
     const check = ScanSchema.safeParse(raw);
