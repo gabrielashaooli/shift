@@ -69,9 +69,6 @@ const JSON_SCHEMA = {
   required: ["map", "findings", "blueprint", "summary"],
 };
 
-// Gratis, incluido en Cloudflare. Es de los pocos modelos de Workers AI con
-// modo JSON, que es lo que permite validar la respuesta contra el esquema.
-const WORKERS_AI_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 const CLAUDE_MODEL = "claude-opus-5";
 
 const clamp = (n: number, min: number, max: number) =>
@@ -96,25 +93,6 @@ What the company does: ${data.what}
 Most painful process: ${data.pain}`;
 
   return { system, user };
-}
-
-// Workers AI corre dentro del propio Worker: no hay API key ni proveedor
-// externo, y entra en la cuota gratuita diaria de Cloudflare.
-async function runOnWorkersAI(system: string, user: string): Promise<unknown> {
-  const { env } = await import("cloudflare:workers");
-  if (!env.AI) throw new Error("Falta la conexión AI del Worker");
-
-  const out = await env.AI.run(WORKERS_AI_MODEL, {
-    messages: [
-      { role: "system", content: system },
-      { role: "user", content: user },
-    ],
-    max_tokens: 2048,
-    response_format: { type: "json_schema", json_schema: JSON_SCHEMA },
-  });
-
-  // Según el modelo, `response` llega ya como objeto o como texto JSON.
-  return typeof out.response === "string" ? JSON.parse(out.response) : out.response;
 }
 
 // Camino opcional: si algún día se configura ANTHROPIC_API_KEY, el scan usa
@@ -165,9 +143,15 @@ export const runScan = createServerFn({ method: "POST" })
     const { system, user } = buildPrompt(data);
 
     const apiKey = process.env["ANTHROPIC_API_KEY"];
-    const raw = apiKey
-      ? await runOnClaude(system, user, apiKey)
-      : await runOnWorkersAI(system, user);
+    let raw: unknown;
+    if (apiKey) {
+      raw = await runOnClaude(system, user, apiKey);
+    } else {
+      // Workers AI corre dentro del propio Worker: no hay API key ni proveedor
+      // externo, y entra en la cuota gratuita diaria de Cloudflare.
+      const { runOnWorkersAI } = await import("./scan.workers-ai.server");
+      raw = await runOnWorkersAI(system, user, JSON_SCHEMA);
+    }
 
     const check = ScanSchema.safeParse(raw);
     if (!check.success) {
