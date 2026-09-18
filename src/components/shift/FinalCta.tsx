@@ -46,8 +46,8 @@ export function FinalCta() {
           <Wordmark className="text-lg" />
           <p className="mono-label">
             {t.footer} ·{" "}
-            <a href="https://shift.com.mx" target="_blank" rel="noreferrer" className="hover:text-foreground">
-              shift.com.mx
+            <a href="https://shiftsoftware.com.mx" target="_blank" rel="noreferrer" className="hover:text-foreground">
+              shiftsoftware.com.mx
             </a>
           </p>
           <p className="mono-label">© {new Date().getFullYear()} SHIFT</p>
