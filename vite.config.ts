@@ -6,6 +6,12 @@ import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  build: {
+    rolldownOptions: {
+      // Los módulos cloudflare:* los provee el runtime del Worker, no el bundle.
+      external: [/^cloudflare:/],
+    },
+  },
   plugins: [
     tsConfigPaths(),
     tailwindcss(),
