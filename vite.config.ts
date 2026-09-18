@@ -6,6 +6,19 @@ import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  resolve: {
+    // Una sola copia de React y del runtime de TanStack en el bundle: con dos,
+    // la instancia que envía la llamada al servidor no es la que procesa la
+    // respuesta, y la promesa termina sin datos y sin error.
+    dedupe: [
+      "react",
+      "react-dom",
+      "@tanstack/react-router",
+      "@tanstack/react-start",
+      "@tanstack/react-query",
+      "seroval",
+    ],
+  },
   build: {
     rolldownOptions: {
       // Los módulos cloudflare:* los provee el runtime del Worker, no el bundle.

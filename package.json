@@ -97,6 +97,6 @@
     "wrangler": "4.134.0"
   },
   "overrides": {
-    "miniflare": "^4.20260515.0"
+    "miniflare": "5.20260917.0-alpha"
   }
 }
