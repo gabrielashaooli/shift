@@ -1,11 +1,12 @@
-// Usa el logo completo, que ya incluye la palabra SHIFT, así que no se repite
-// en texto al lado.
-import logo from "@/assets/shift-logo.png";
+// La marca es la S de flechas (el cambio de un estado al otro) y la palabra la
+// pone la tipografía del sitio, para que no compita con otra fuente.
+import mark from "@/assets/shift-mark.png";
 
 export function Wordmark({ className = "text-xl" }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center leading-none ${className}`}>
-      <img src={logo} alt="SHIFT" className="h-[1.2em] w-auto" />
+    <span className={`display-xl inline-flex items-center gap-2 leading-none ${className}`}>
+      <img src={mark} alt="" aria-hidden="true" className="h-[1.15em] w-auto" />
+      <span>SHIFT</span>
     </span>
   );
 }
