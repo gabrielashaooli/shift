@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "prepare": "npm run build",
     "postbuild": "node scripts/set-worker-name.mjs",
     "build:dev": "vite build --mode development",
     "preview": "wrangler dev",
