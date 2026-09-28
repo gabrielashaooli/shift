@@ -36,9 +36,27 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+// Datos estructurados: le dicen a Google qué empresa es, a quién atiende y
+// cómo contactarla. Solo se declara lo que es verificable desde el sitio.
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "SHIFT",
+  url,
+  description,
+  email: "shiftsoftwaremx@gmail.com",
+  telephone: "+525510807509",
+  areaServed: { "@type": "Country", name: "México" },
+  knowsLanguage: ["es-MX", "en"],
+};
+
 function Index() {
   return (
     <LangProvider>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+      />
       <Nav />
       <main>
         <Hero />
