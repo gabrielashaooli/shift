@@ -7,14 +7,14 @@ export function Contrast() {
 
   return (
     <section id="problem" className="border-t border-border bg-surface py-28 md:py-40">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1100px] px-5 md:px-10">
         <p className="mono-label">{t.baLabel}</p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="display-xl mt-8 max-w-4xl text-[7vw] md:text-[3.4vw]"
+          className="display-xl mt-8 max-w-4xl text-[1.75rem] md:text-[2.4rem]"
         >
           {t.baTitle}
         </motion.h2>
@@ -43,7 +43,7 @@ export function Contrast() {
                 transition={{ duration: 0.7, delay: i * 0.12 }}
                 className="text-right"
               >
-                <span className="display-xl inline-block text-[5vw] text-muted-foreground md:text-[2.2vw]">
+                <span className="display-xl inline-block text-[1.25rem] text-muted-foreground md:text-[1.5rem]">
                   <span className="relative inline-block">
                     {from}
                     <motion.span
@@ -69,7 +69,7 @@ export function Contrast() {
                 variants={{ rest: { opacity: 0, x: -18 }, shifted: { opacity: 1, x: 0 } }}
                 transition={{ duration: 0.6, delay: 0.42 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className="display-xl text-[5vw] md:text-[2.2vw]">{to}</span>
+                <span className="display-xl text-[1.25rem] md:text-[1.5rem]">{to}</span>
                 <p className="mt-2 text-sm text-muted-foreground">{afterLine}</p>
               </motion.div>
             </motion.div>

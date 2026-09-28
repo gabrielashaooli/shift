@@ -6,7 +6,7 @@ export function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 md:px-10">
+      <div className="mx-auto flex h-16 max-w-[1100px] items-center justify-between px-5 md:px-10">
         <a href="#top" className="flex items-center gap-3">
           <Wordmark className="text-xl" />
         </a>
@@ -27,7 +27,7 @@ export function Nav() {
               <button
                 key={l}
                 onClick={() => setLang(l)}
-                className={`border-b pb-1 font-mono text-[11px] tracking-widest uppercase transition-colors ${
+                className={`border-b pb-1 text-[0.9375rem] transition-colors ${
                   lang === l ? "border-signal text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -38,7 +38,7 @@ export function Nav() {
 
           <a
             href="#contact"
-            className="nav-link hidden border-b border-foreground pb-1 font-mono text-[11px] tracking-widest uppercase transition-colors hover:text-signal md:block"
+            className="nav-link hidden border-b border-foreground pb-1 text-[0.9375rem] transition-colors hover:text-signal md:block"
           >
             {t.navContact}
           </a>

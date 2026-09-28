@@ -7,7 +7,7 @@ export function Process() {
 
   return (
     <section className="border-t border-border py-28 md:py-40">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1100px] px-5 md:px-10">
         <p className="mono-label">{t.processLabel}</p>
         <div className="mt-14 grid gap-px border border-border bg-border md:grid-cols-4">
           {t.process.map(([step, line], i) => (

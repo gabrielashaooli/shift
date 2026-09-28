@@ -7,9 +7,9 @@ export function Systems() {
 
   return (
     <section id="systems" className="border-t border-border py-28 md:py-40">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1100px] px-5 md:px-10">
         <p className="mono-label">{t.proofLabel}</p>
-        <h2 className="display-xl mt-6 max-w-3xl text-[5vw] md:text-[2.6vw]">{t.proofTitle}</h2>
+        <h2 className="display-xl mt-6 max-w-3xl text-[1.75rem] md:text-[2.4rem]">{t.proofTitle}</h2>
 
         <div className="mt-16 grid grid-cols-[minmax(0,1fr)] gap-px border border-border bg-border md:grid-cols-3">
           {t.proof.map((p, i) => (
@@ -21,7 +21,7 @@ export function Systems() {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="flex flex-col bg-background p-6 md:p-8"
             >
-              <p className="display-xl text-[9vw] leading-[0.95] break-words md:text-[3vw]">
+              <p className="display-xl text-[2rem] leading-tight break-words md:text-[2.5rem]">
                 {p.figure}
               </p>
               <p className="mono-label mt-3 text-signal">{p.figureNote}</p>

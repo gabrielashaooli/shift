@@ -4,7 +4,6 @@ import { Capabilities } from "@/components/shift/Capabilities";
 import { Contrast } from "@/components/shift/Contrast";
 import { FinalCta } from "@/components/shift/FinalCta";
 import { Process } from "@/components/shift/Process";
-import { Ticker } from "@/components/shift/Ticker";
 import { Hero } from "@/components/shift/Hero";
 import { Nav } from "@/components/shift/Nav";
 import { Scan } from "@/components/shift/Scan";
@@ -12,9 +11,12 @@ import { Systems } from "@/components/shift/Systems";
 import { Trust } from "@/components/shift/Trust";
 import { LangProvider } from "@/lib/i18n";
 
-const title = "SHIFT — We build a working demo of your process before you pay";
+// El mercado es México: el título y la descripción que ve Google van en
+// español y nombran lo que la gente busca, no el eslogan interno.
+const title = "SHIFT · Software y sistemas a la medida en México";
 const description =
-  "Custom internal systems, apps, AI automation and ERP replacement, built on your operation. Run the SHIFT Intelligence Scan and get a process map, findings and a blueprint.";
+  "Desarrollamos sistemas a la medida, apps y automatización para empresas en México: pedidos, inventarios, facturación y reportes. Te mostramos una demo funcional de tu proceso antes de que pagues.";
+const url = "https://shiftsoftware.com.mx/";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,8 +26,12 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+      { property: "og:locale", content: "es_MX" },
+      { property: "og:site_name", content: "SHIFT" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: url }],
   }),
   component: Index,
 });
@@ -36,7 +42,6 @@ function Index() {
       <Nav />
       <main>
         <Hero />
-        <Ticker />
         <Capabilities />
         <Contrast />
         <Process />

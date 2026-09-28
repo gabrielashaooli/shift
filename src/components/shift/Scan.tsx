@@ -22,15 +22,15 @@ export function Scan() {
 
   return (
     <section id="scan" className="border-t border-border bg-foreground py-28 text-background md:py-40">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1100px] px-5 md:px-10">
         <p className="mono-label text-background/50">{t.scanLabel}</p>
-        <h2 className="display-xl mt-6 max-w-4xl text-[8vw] md:text-[3.8vw]">{t.scanTitle}</h2>
+        <h2 className="display-xl mt-6 max-w-4xl text-[1.75rem] md:text-[2.4rem]">{t.scanTitle}</h2>
         <p className="mt-6 max-w-2xl text-lg text-background/70">{t.scanSub}</p>
 
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           {t.scanDeliverables.map(([title, line], i) => (
             <div key={title} className="border-t border-signal pt-4">
-              <p className="font-mono text-[11px] tracking-widest uppercase">
+              <p className="text-[0.9375rem]">
                 {String(i + 1).padStart(2, "0")} — {title}
               </p>
               <p className="mt-2 text-background/70">{line}</p>
@@ -74,13 +74,13 @@ export function Scan() {
             <button
               type="submit"
               disabled={disabled || mutation.isPending}
-              className="inline-flex border-b-2 border-signal pb-2 font-mono text-[11px] tracking-widest text-background uppercase transition-colors hover:text-signal disabled:opacity-40"
+              className="inline-flex border-b-2 border-signal pb-2 text-[0.9375rem] text-background transition-colors hover:text-signal disabled:opacity-40"
             >
               {mutation.isPending ? `${t.scanRunning}…` : t.scanRun}
             </button>
 
             {mutation.isError && (
-              <p className="font-mono text-[11px] tracking-widest text-signal uppercase">{t.scanError}</p>
+              <p className="text-[0.9375rem] text-signal">{t.scanError}</p>
             )}
           </form>
 
@@ -101,7 +101,7 @@ export function Scan() {
                         initial={{ opacity: 0.2 }}
                         animate={{ opacity: [0.2, 1, 0.35] }}
                         transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.35 }}
-                        className="font-mono text-[11px] tracking-widest uppercase"
+                        className="text-[0.9375rem]"
                       >
                         {step}…
                       </motion.p>
@@ -116,7 +116,7 @@ export function Scan() {
                   <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-3 text-background/25">
                     {t.scanIdleMap.map(
                       (s, i, arr) => (
-                        <span key={s} className="flex items-center gap-3 font-mono text-xs tracking-widest uppercase">
+                        <span key={s} className="flex items-center gap-3 text-sm">
                           {s}
                           {i < arr.length - 1 && <span className="text-signal/50">→</span>}
                         </span>
@@ -143,7 +143,7 @@ export function Scan() {
                             initial={{ opacity: 0, y: 8, borderColor: "rgba(255,255,255,0.05)" }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.28, duration: 0.4 }}
-                            className="border border-background/25 px-2 py-1 font-mono text-xs tracking-widest uppercase"
+                            className="border border-background/25 px-2 py-1 text-sm"
                           >
                             {step}
                           </motion.span>
@@ -171,7 +171,7 @@ export function Scan() {
                           transition={{ delay: mapDone + i * 0.45, duration: 0.5 }}
                           className="group border-b border-background/15 py-5"
                         >
-                          <p className="flex items-center gap-3 font-mono text-[11px] tracking-widest text-signal uppercase">
+                          <p className="flex items-center gap-3 text-[0.9375rem] text-signal">
                             <motion.span
                               initial={{ scaleX: 0 }}
                               animate={{ scaleX: 1 }}
@@ -213,13 +213,13 @@ export function Scan() {
                   <div className="flex flex-wrap gap-x-8 gap-y-5">
                     <a
                       href="#contact"
-                      className="border-b-2 border-signal pb-2 font-mono text-[11px] tracking-widest uppercase transition-colors hover:text-signal"
+                      className="border-b-2 border-signal pb-2 text-[0.9375rem] transition-colors hover:text-signal"
                     >
                       {t.scanBuildCta} →
                     </a>
                     <button
                       onClick={() => mutation.reset()}
-                      className="border-b border-background/40 pb-2 font-mono text-[11px] tracking-widest uppercase transition-colors hover:text-signal"
+                      className="border-b border-background/40 pb-2 text-[0.9375rem] transition-colors hover:text-signal"
                     >
                       {t.scanAgain}
                     </button>
@@ -240,7 +240,7 @@ function Stat({ n, label, delay = 0 }: { n: number | string; label: string; dela
       <p className="display-xl text-4xl md:text-5xl">
         {typeof n === "number" ? <Counter n={n} delay={delay} /> : n}
       </p>
-      <p className="mt-2 font-mono text-[10px] leading-relaxed tracking-widest text-background/50 uppercase">
+      <p className="mt-2 font-mono text-[10px] leading-relaxed tracking-widest text-background/50">
         {label}
       </p>
     </motion.div>

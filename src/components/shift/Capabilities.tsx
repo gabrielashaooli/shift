@@ -10,7 +10,7 @@ export function Capabilities() {
       id="capabilities"
       className="overflow-hidden border-t border-border py-28 md:py-40"
     >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+      <div className="mx-auto max-w-[1100px] px-5 md:px-10">
         <p className="mono-label">{t.capLabel}</p>
 
         <div className="mt-16 space-y-24 md:space-y-36">
@@ -47,7 +47,7 @@ export function Capabilities() {
                   {cap.items.map((item) => (
                     <li
                       key={item}
-                      className="border-b border-border py-3 font-mono text-xs tracking-widest uppercase"
+                      className="border-b border-border py-3 text-sm"
                     >
                       {item}
                     </li>

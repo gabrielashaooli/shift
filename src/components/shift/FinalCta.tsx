@@ -6,8 +6,8 @@ export function FinalCta() {
 
   return (
     <section id="contact" className="border-t border-border py-28 md:py-40">
-      <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-        <h2 className="display-xl text-[11vw] md:text-[7vw]">{t.ctaTitle}</h2>
+      <div className="mx-auto max-w-[1100px] px-5 md:px-10">
+        <h2 className="display-xl text-[2.25rem] md:text-[3.2rem]">{t.ctaTitle}</h2>
         <p className="mt-8 max-w-2xl text-lg text-muted-foreground">{t.ctaSub}</p>
 
         <div className="mt-12 flex flex-wrap gap-x-8 gap-y-5">
@@ -15,7 +15,7 @@ export function FinalCta() {
             href="https://wa.me/525510807509"
             target="_blank"
             rel="noreferrer"
-            className="border-b-2 border-signal pb-2 font-mono text-[11px] tracking-widest uppercase transition-colors hover:text-signal"
+            className="border-b-2 border-signal pb-2 text-[0.9375rem] transition-colors hover:text-signal"
           >
             {t.ctaTalk}
           </a>
@@ -23,19 +23,19 @@ export function FinalCta() {
             href="https://wa.me/525566287424"
             target="_blank"
             rel="noreferrer"
-            className="border-b border-foreground pb-2 font-mono text-[11px] tracking-widest uppercase transition-colors hover:text-signal"
+            className="border-b border-foreground pb-2 text-[0.9375rem] transition-colors hover:text-signal"
           >
             {t.ctaTalk2}
           </a>
           <a
             href="#scan"
-            className="border-b-2 border-signal pb-2 font-mono text-[11px] tracking-widest uppercase transition-colors hover:text-signal"
+            className="border-b-2 border-signal pb-2 text-[0.9375rem] transition-colors hover:text-signal"
           >
             {t.ctaScan}
           </a>
           <a
             href="mailto:shiftsoftwaremx@gmail.com"
-            className="border-b border-border pb-2 font-mono text-[11px] tracking-widest text-muted-foreground uppercase transition-colors hover:border-foreground hover:text-foreground"
+            className="border-b border-border pb-2 text-[0.9375rem] text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
           >
             {t.ctaMail}
           </a>
