@@ -42,7 +42,30 @@ export function FinalCta() {
 
         </div>
 
-        <footer className="mt-28 flex flex-wrap items-center justify-between gap-6 border-t border-border pt-8">
+        {/* Enlaces a las páginas de servicio: es como Google llega a ellas y
+            como el visitante encuentra el detalle de cada cosa. */}
+        <nav className="mt-24 border-t border-border pt-8">
+          <p className="mono-label">Servicios</p>
+          <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
+            {[
+              ["/sistema-de-inventarios", "Sistema de inventarios"],
+              ["/software-de-facturacion", "Software de facturación"],
+              ["/automatizacion-de-procesos", "Automatización de procesos"],
+              ["/software-a-la-medida-cdmx", "Software a la medida en CDMX"],
+            ].map(([href, label]) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  className="text-[0.9375rem] text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <footer className="mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-border pt-8">
           <Wordmark className="text-lg" />
           <p className="mono-label">
             {t.footer} ·{" "}

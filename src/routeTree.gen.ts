@@ -10,33 +10,90 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AutomatizacionDeProcesosRouteImport } from './routes/automatizacion-de-procesos'
+import { Route as SistemaDeInventariosRouteImport } from './routes/sistema-de-inventarios'
+import { Route as SoftwareALaMedidaCdmxRouteImport } from './routes/software-a-la-medida-cdmx'
+import { Route as SoftwareDeFacturacionRouteImport } from './routes/software-de-facturacion'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AutomatizacionDeProcesosRoute =
+  AutomatizacionDeProcesosRouteImport.update({
+    id: '/automatizacion-de-procesos',
+    path: '/automatizacion-de-procesos',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SistemaDeInventariosRoute = SistemaDeInventariosRouteImport.update({
+  id: '/sistema-de-inventarios',
+  path: '/sistema-de-inventarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SoftwareALaMedidaCdmxRoute = SoftwareALaMedidaCdmxRouteImport.update({
+  id: '/software-a-la-medida-cdmx',
+  path: '/software-a-la-medida-cdmx',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SoftwareDeFacturacionRoute = SoftwareDeFacturacionRouteImport.update({
+  id: '/software-de-facturacion',
+  path: '/software-de-facturacion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/automatizacion-de-procesos': typeof AutomatizacionDeProcesosRoute
+  '/sistema-de-inventarios': typeof SistemaDeInventariosRoute
+  '/software-a-la-medida-cdmx': typeof SoftwareALaMedidaCdmxRoute
+  '/software-de-facturacion': typeof SoftwareDeFacturacionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/automatizacion-de-procesos': typeof AutomatizacionDeProcesosRoute
+  '/sistema-de-inventarios': typeof SistemaDeInventariosRoute
+  '/software-a-la-medida-cdmx': typeof SoftwareALaMedidaCdmxRoute
+  '/software-de-facturacion': typeof SoftwareDeFacturacionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/automatizacion-de-procesos': typeof AutomatizacionDeProcesosRoute
+  '/sistema-de-inventarios': typeof SistemaDeInventariosRoute
+  '/software-a-la-medida-cdmx': typeof SoftwareALaMedidaCdmxRoute
+  '/software-de-facturacion': typeof SoftwareDeFacturacionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/automatizacion-de-procesos'
+    | '/sistema-de-inventarios'
+    | '/software-a-la-medida-cdmx'
+    | '/software-de-facturacion'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/automatizacion-de-procesos'
+    | '/sistema-de-inventarios'
+    | '/software-a-la-medida-cdmx'
+    | '/software-de-facturacion'
+  id:
+    | '__root__'
+    | '/'
+    | '/automatizacion-de-procesos'
+    | '/sistema-de-inventarios'
+    | '/software-a-la-medida-cdmx'
+    | '/software-de-facturacion'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AutomatizacionDeProcesosRoute: typeof AutomatizacionDeProcesosRoute
+  SistemaDeInventariosRoute: typeof SistemaDeInventariosRoute
+  SoftwareALaMedidaCdmxRoute: typeof SoftwareALaMedidaCdmxRoute
+  SoftwareDeFacturacionRoute: typeof SoftwareDeFacturacionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +105,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/automatizacion-de-procesos': {
+      id: '/automatizacion-de-procesos'
+      path: '/automatizacion-de-procesos'
+      fullPath: '/automatizacion-de-procesos'
+      preLoaderRoute: typeof AutomatizacionDeProcesosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sistema-de-inventarios': {
+      id: '/sistema-de-inventarios'
+      path: '/sistema-de-inventarios'
+      fullPath: '/sistema-de-inventarios'
+      preLoaderRoute: typeof SistemaDeInventariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/software-a-la-medida-cdmx': {
+      id: '/software-a-la-medida-cdmx'
+      path: '/software-a-la-medida-cdmx'
+      fullPath: '/software-a-la-medida-cdmx'
+      preLoaderRoute: typeof SoftwareALaMedidaCdmxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/software-de-facturacion': {
+      id: '/software-de-facturacion'
+      path: '/software-de-facturacion'
+      fullPath: '/software-de-facturacion'
+      preLoaderRoute: typeof SoftwareDeFacturacionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AutomatizacionDeProcesosRoute: AutomatizacionDeProcesosRoute,
+  SistemaDeInventariosRoute: SistemaDeInventariosRoute,
+  SoftwareALaMedidaCdmxRoute: SoftwareALaMedidaCdmxRoute,
+  SoftwareDeFacturacionRoute: SoftwareDeFacturacionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
