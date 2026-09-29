@@ -26,6 +26,9 @@ config.routes = [
 ];
 config.workers_dev = true;
 config.preview_urls = true;
+// Sin esto, Cloudflare redirige /archivo.html a /archivo, y el verificador de
+// Google pide que su archivo responda 200 en la ruta exacta.
+config.assets = { ...(config.assets ?? {}), html_handling: "none" };
 
 await writeFile(CONFIG, `${JSON.stringify(config, null, 2)}\n`);
 console.log(`[worker-config] "${WORKER_NAME}" con IA, rutas de ${ZONE} y vistas previa activas`);
