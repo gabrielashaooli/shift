@@ -36,16 +36,31 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// Datos estructurados: le dicen a Google qué empresa es, a quién atiende y
-// cómo contactarla. Solo se declara lo que es verificable desde el sitio.
+// Datos estructurados: conectan el sitio con el Perfil de Empresa para que
+// Google trate ambos como el mismo negocio. Los datos coinciden con los del
+// perfil (nombre, teléfono y ubicación); no se inventa nada que no esté ahí.
+const mapsUrl =
+  "https://www.google.com/maps/place/ShiftSoftware/@19.3873751,-99.252799,17z/data=!4m6!3m5!1s0x85d2013f8cfbfb2f:0x8620397e91400076!8m2!3d19.3873751!4d-99.252799!16s%2Fg%2F11nk68nj56";
+
 const organization = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "SHIFT",
+  "@type": "ProfessionalService",
+  name: "ShiftSoftware",
+  alternateName: "SHIFT",
   url,
   description,
   email: "shiftsoftwaremx@gmail.com",
   telephone: "+525510807509",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Cuajimalpa de Morelos",
+    addressRegion: "CDMX",
+    postalCode: "05100",
+    addressCountry: "MX",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: 19.3873751, longitude: -99.252799 },
+  hasMap: mapsUrl,
+  sameAs: [mapsUrl],
   areaServed: { "@type": "Country", name: "México" },
   knowsLanguage: ["es-MX", "en"],
 };
