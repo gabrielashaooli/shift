@@ -15,7 +15,7 @@ import { LangProvider } from "@/lib/i18n";
 // español y nombran lo que la gente busca, no el eslogan interno.
 const title = "SHIFT · Software y sistemas a la medida en México";
 const description =
-  "Desarrollamos sistemas a la medida, apps y automatización para empresas en México: pedidos, inventarios, facturación y reportes. Armamos primero la parte que más te duele, con tus datos, y la pruebas antes de pagar.";
+  "Diseñamos y construimos software a la medida para empresas en México: pedidos, inventarios, facturación, reportes y automatización con inteligencia artificial. El primer entregable es funcional: lo pruebas antes de pagar.";
 const url = "https://shiftsoftware.com.mx/";
 
 export const Route = createFileRoute("/")({
