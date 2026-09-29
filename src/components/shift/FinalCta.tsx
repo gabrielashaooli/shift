@@ -34,7 +34,7 @@ export function FinalCta() {
             {t.ctaScan}
           </a>
           <a
-            href="mailto:shiftsoftwaremx@gmail.com"
+            href="mailto:info@shiftsoftware.com.mx"
             className="border-b border-border pb-2 text-[0.9375rem] text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
           >
             {t.ctaMail}

@@ -49,7 +49,7 @@ const organization = {
   alternateName: "SHIFT",
   url,
   description,
-  email: "shiftsoftwaremx@gmail.com",
+  email: "info@shiftsoftware.com.mx",
   telephone: "+525510807509",
   address: {
     "@type": "PostalAddress",
