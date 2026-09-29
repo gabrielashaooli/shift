@@ -92,7 +92,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Mono:wght@400;500&display=swap",
       },
-      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      // El ?v= obliga a navegadores y CDN a pedir el icono nuevo: el anterior
+      // quedó cacheado con el logo viejo. Súbelo si vuelve a cambiar.
+      { rel: "icon", href: "/favicon.png?v=2", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/favicon.png?v=2" },
     ],
   }),
   shellComponent: RootShell,
