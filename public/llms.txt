@@ -1,0 +1,44 @@
+# SHIFT (ShiftSoftware)
+
+> Desarrollo de software a la medida para empresas en México. Diseñamos y
+> construimos sistemas internos, automatización de procesos e inteligencia
+> artificial aplicada a la operación. Con sede en Ciudad de México.
+
+## Qué hace la empresa
+
+SHIFT construye sistemas internos a la medida para empresas cuya operación ya
+no cabe en hojas de cálculo: control de inventarios, pedidos, facturación,
+cobranza, reportes y aplicaciones para equipos en campo. También reemplaza
+sistemas heredados migrando la información histórica y operando ambos sistemas
+en paralelo, sin detener a la empresa.
+
+A diferencia de un software comercial que se configura, aquí el sistema se
+programa alrededor del proceso real del cliente, incluidas sus excepciones.
+
+## Datos
+
+- Nombre: ShiftSoftware (marca: SHIFT)
+- Sitio: https://shiftsoftware.com.mx
+- Ubicación: Cuajimalpa de Morelos, Ciudad de México, México
+- Atiende: toda la República Mexicana
+- Contacto: info@shiftsoftware.com.mx · +52 55 1080 7509
+- Fundadoras: Sofía y Gabriela, quienes diseñan y programan cada sistema
+
+## Servicios
+
+- [Software a la medida en CDMX](https://shiftsoftware.com.mx/software-a-la-medida-cdmx): sistemas internos, apps de campo, reemplazo de sistemas heredados e integración entre plataformas.
+- [Sistema de inventarios](https://shiftsoftware.com.mx/sistema-de-inventarios): existencias en tiempo real, varios almacenes, captura desde el celular sin señal, alertas de mínimos y trazabilidad.
+- [Software de facturación](https://shiftsoftware.com.mx/software-de-facturacion): de pedido a factura sin recapturar, lectura de facturas de proveedores con IA, conciliación de pagos y estado de cuenta por cliente.
+- [Automatización de procesos](https://shiftsoftware.com.mx/automatizacion-de-procesos): órdenes de compra automáticas, aprobaciones con rastro, reportes programados y lectura de documentos con IA.
+
+## Cómo trabaja
+
+Primero revisa la operación real del cliente y detecta dónde se pierden horas.
+Construye el proceso más crítico para que el cliente lo evalúe funcionando
+antes de comprometerse. La implementación incluye migración de datos,
+configuración y capacitación, con precio cerrado por proyecto.
+
+## Sistemas en operación
+
+SINAI, VIDARQ y TAG · Muestras son sistemas construidos por SHIFT que hoy
+están en uso.
