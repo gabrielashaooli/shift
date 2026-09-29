@@ -4,7 +4,7 @@ export type Lang = "en" | "es";
 
 const copy = {
   en: {
-    navScan: "Intelligence Scan",
+    navScan: "Process analysis",
     navWork: "Cases",
     navContact: "Talk to us",
     heroSeq1: "What eats your hours today, solved in one system.",
@@ -12,9 +12,9 @@ const copy = {
     heroSeq3: "A working demo built around your process.",
     heroTitle: "Technology built around your operation.",
     heroSub:
-      "We design and build the system your company needs: orders, inventory, invoicing and reporting in one place. The first deliverable works: you try it before you pay.",
+      "We design and build the system your company needs: orders, inventory, invoicing and reporting in one place, integrated into the way you already work.",
     heroServices: "WEB SYSTEMS · APPS · AI AUTOMATION · LEGACY",
-    heroKicker: "Custom software engineering · Mexico City",
+    heroKicker: "Custom software · Mexico City",
     heroCta: "Analyze my business",
     heroCta2: "See the systems",
     heroSkip: "Skip",
@@ -84,7 +84,7 @@ const copy = {
         line: "One platform with a state machine, automatic folios and printed labels.",
       },
     ],
-    scanLabel: "SHIFT Intelligence Scan",
+    scanLabel: "Process analysis",
     scanTitle: "Three answers about your operation, in 90 seconds.",
     scanSub: "Answer three questions and the scan returns:",
     scanDeliverables: [
@@ -164,7 +164,7 @@ const copy = {
 
   },
   es: {
-    navScan: "Intelligence Scan",
+    navScan: "Análisis de tu proceso",
     navWork: "Casos",
     navContact: "Hablemos",
     heroSeq1: "Lo que hoy te quita horas, resuelto en un sistema.",
@@ -172,9 +172,9 @@ const copy = {
     heroSeq3: "Una demo funcional sobre tu proceso.",
     heroTitle: "Tecnología construida alrededor de tu operación.",
     heroSub:
-      "Diseñamos y construimos el sistema que tu empresa necesita: pedidos, inventarios, facturación y reportes en un solo lugar. El primer entregable es funcional: lo pruebas antes de pagar.",
+      "Diseñamos y construimos el sistema que tu empresa necesita: pedidos, inventarios, facturación y reportes en un solo lugar, integrados a la forma en que ya trabajas.",
     heroServices: "SISTEMAS WEB · APPS · AUTOMATIZACIÓN CON IA · LEGACY",
-    heroKicker: "Ingeniería de software a la medida · Ciudad de México",
+    heroKicker: "Software a la medida · Ciudad de México",
     heroCta: "Analizar mi empresa",
     heroCta2: "Ver los sistemas",
     heroSkip: "Saltar",
@@ -244,7 +244,7 @@ const copy = {
         line: "Una sola plataforma con máquina de estados, folios automáticos e impresión de etiquetas.",
       },
     ],
-    scanLabel: "SHIFT Intelligence Scan",
+    scanLabel: "Análisis de tu proceso",
     scanTitle: "Tres respuestas sobre tu operación, en 90 segundos.",
     scanSub: "Contestas tres preguntas y el scan devuelve:",
     scanDeliverables: [
