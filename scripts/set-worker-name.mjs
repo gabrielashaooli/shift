@@ -1,32 +1,31 @@
 // Ajusta el wrangler.json que genera nitro:
-//  - El nombre del Worker: nitro lo deriva del repo y el deploy crearía uno
-//    nuevo en vez de actualizar el Worker "shift" que ya existe en Cloudflare.
-//  - La conexión con Workers AI, que es la que corre el Intelligence Scan.
+//  - Nombre del Worker: nitro lo deriva del repo y el deploy crearía uno nuevo
+//    en vez de actualizar el Worker "shift" que ya existe en Cloudflare.
+//  - Conexión con Workers AI, que es la que corre el Intelligence Scan.
+//  - Rutas del dominio: el dominio estaba servido por un proyecto de Pages sin
+//    acceso a la IA; con estas rutas lo atiende el Worker.
+//  - workers.dev y preview_urls: sin declararlos, el deploy los desactiva y
+//    las URLs de vista previa de cada rama dejan de responder.
 import { readFile, writeFile } from "node:fs/promises";
 
 const WORKER_NAME = "shift";
 const CONFIG = ".output/server/wrangler.json";
+const ZONE = "shiftsoftware.com.mx";
 
 const raw = await readFile(CONFIG, "utf8").catch(() => {
   throw new Error(`No se encontró ${CONFIG}. ¿Corrió "vite build" antes?`);
 });
 
 const config = JSON.parse(raw);
-const changes = [];
 
-if (config.name !== WORKER_NAME) {
-  changes.push(`nombre "${config.name}" -> "${WORKER_NAME}"`);
-  config.name = WORKER_NAME;
-}
+config.name = WORKER_NAME;
+config.ai = { binding: "AI" };
+config.routes = [
+  { pattern: `${ZONE}/*`, zone_name: ZONE },
+  { pattern: `www.${ZONE}/*`, zone_name: ZONE },
+];
+config.workers_dev = true;
+config.preview_urls = true;
 
-if (config.ai?.binding !== "AI") {
-  config.ai = { binding: "AI" };
-  changes.push("conexión AI agregada");
-}
-
-if (changes.length === 0) {
-  console.log("[worker-config] sin cambios");
-} else {
-  await writeFile(CONFIG, `${JSON.stringify(config, null, 2)}\n`);
-  console.log(`[worker-config] ${changes.join(", ")}`);
-}
+await writeFile(CONFIG, `${JSON.stringify(config, null, 2)}\n`);
+console.log(`[worker-config] "${WORKER_NAME}" con IA, rutas de ${ZONE} y vistas previa activas`);
