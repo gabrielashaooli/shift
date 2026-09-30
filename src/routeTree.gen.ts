@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AutomatizacionDeProcesosRouteImport } from './routes/automatizacion-de-procesos'
+import { Route as CasosRouteImport } from './routes/casos'
 import { Route as PreguntasFrecuentesRouteImport } from './routes/preguntas-frecuentes'
 import { Route as SistemaDeInventariosRouteImport } from './routes/sistema-de-inventarios'
 import { Route as SoftwareALaMedidaCdmxRouteImport } from './routes/software-a-la-medida-cdmx'
@@ -27,6 +28,11 @@ const AutomatizacionDeProcesosRoute =
     path: '/automatizacion-de-procesos',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CasosRoute = CasosRouteImport.update({
+  id: '/casos',
+  path: '/casos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PreguntasFrecuentesRoute = PreguntasFrecuentesRouteImport.update({
   id: '/preguntas-frecuentes',
   path: '/preguntas-frecuentes',
@@ -51,6 +57,7 @@ const SoftwareDeFacturacionRoute = SoftwareDeFacturacionRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/automatizacion-de-procesos': typeof AutomatizacionDeProcesosRoute
+  '/casos': typeof CasosRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sistema-de-inventarios': typeof SistemaDeInventariosRoute
   '/software-a-la-medida-cdmx': typeof SoftwareALaMedidaCdmxRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/automatizacion-de-procesos': typeof AutomatizacionDeProcesosRoute
+  '/casos': typeof CasosRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sistema-de-inventarios': typeof SistemaDeInventariosRoute
   '/software-a-la-medida-cdmx': typeof SoftwareALaMedidaCdmxRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/automatizacion-de-procesos': typeof AutomatizacionDeProcesosRoute
+  '/casos': typeof CasosRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sistema-de-inventarios': typeof SistemaDeInventariosRoute
   '/software-a-la-medida-cdmx': typeof SoftwareALaMedidaCdmxRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/automatizacion-de-procesos'
+    | '/casos'
     | '/preguntas-frecuentes'
     | '/sistema-de-inventarios'
     | '/software-a-la-medida-cdmx'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/automatizacion-de-procesos'
+    | '/casos'
     | '/preguntas-frecuentes'
     | '/sistema-de-inventarios'
     | '/software-a-la-medida-cdmx'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/automatizacion-de-procesos'
+    | '/casos'
     | '/preguntas-frecuentes'
     | '/sistema-de-inventarios'
     | '/software-a-la-medida-cdmx'
@@ -103,6 +115,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AutomatizacionDeProcesosRoute: typeof AutomatizacionDeProcesosRoute
+  CasosRoute: typeof CasosRoute
   PreguntasFrecuentesRoute: typeof PreguntasFrecuentesRoute
   SistemaDeInventariosRoute: typeof SistemaDeInventariosRoute
   SoftwareALaMedidaCdmxRoute: typeof SoftwareALaMedidaCdmxRoute
@@ -123,6 +136,13 @@ declare module '@tanstack/react-router' {
       path: '/automatizacion-de-procesos'
       fullPath: '/automatizacion-de-procesos'
       preLoaderRoute: typeof AutomatizacionDeProcesosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/casos': {
+      id: '/casos'
+      path: '/casos'
+      fullPath: '/casos'
+      preLoaderRoute: typeof CasosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/preguntas-frecuentes': {
@@ -159,6 +179,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AutomatizacionDeProcesosRoute: AutomatizacionDeProcesosRoute,
+  CasosRoute: CasosRoute,
   PreguntasFrecuentesRoute: PreguntasFrecuentesRoute,
   SistemaDeInventariosRoute: SistemaDeInventariosRoute,
   SoftwareALaMedidaCdmxRoute: SoftwareALaMedidaCdmxRoute,

@@ -52,6 +52,7 @@ export function FinalCta() {
               ["/software-de-facturacion", "Software de facturación"],
               ["/automatizacion-de-procesos", "Automatización de procesos"],
               ["/software-a-la-medida-cdmx", "Software a la medida en CDMX"],
+              ["/casos", "Casos"],
               ["/preguntas-frecuentes", "Preguntas frecuentes"],
             ].map(([href, label]) => (
               <li key={href}>
